@@ -6,7 +6,7 @@ reported; an empty tuple means it is asked broadly.
 """
 from __future__ import annotations
 
-CATEGORIES = ["behavioral", "technical", "hr"]
+CATEGORIES = ["behavioral", "technical", "hr", "situational", "managerial"]
 INDUSTRIES = ["it", "finance", "marketing", "sales", "consulting", "product", "hr", "operations"]
 
 ANY = ()
@@ -193,6 +193,74 @@ _RAW: list[tuple[str, str, str, tuple[str, ...], tuple[str, ...], str, str]] = [
     ("How do you manage inventory for a festive season sale like Big Billion Days?", "technical", "operations",
      ("supply chain analyst", "operations manager"), ("Flipkart", "Amazon", "Myntra"), "hard",
      "Demand forecasting from past data, safety stock, vendor coordination, and warehouse capacity planning."),
+
+    # --- Situational (hypothetical "what would you do" scenarios) ---
+    ("Your manager assigns you two urgent tasks with the same deadline. What do you do?", "situational", "all", ANY, ANY, "easy",
+     "Clarify priority with the manager, estimate effort honestly, and propose a realistic plan rather than silently over-committing."),
+    ("You find a serious mistake in work your team already delivered to a client. What do you do?", "situational", "all", ANY, ANY, "medium",
+     "Flag it immediately, own the fix, inform the client with a remediation plan — hiding it is the only wrong answer."),
+    ("A teammate takes credit for your work in front of leadership. How do you respond?", "situational", "all", ANY, ANY, "medium",
+     "Stay professional: talk to the teammate privately first, keep evidence of your contribution, escalate only if it repeats."),
+    ("You are asked to deliver a project with half the time you estimated. What do you do?", "situational", "all", ANY, ANY, "medium",
+     "Negotiate scope, not quality: propose a phased delivery with the riskiest parts first and state what gets cut."),
+    ("Your client asks for something you believe is a bad idea. How do you handle it?", "situational", "all", ANY, ("TCS", "Infosys", "Accenture"), "medium",
+     "Disagree with data and alternatives, document the recommendation, then commit to the client's final call."),
+    ("You discover a colleague is violating company policy. What do you do?", "situational", "all", ANY, ANY, "hard",
+     "Show integrity: verify what you saw, avoid gossip, and report through the proper channel even if it is uncomfortable."),
+    ("Halfway through a project the requirements change completely. How do you react?", "situational", "all", ANY, ANY, "easy",
+     "Show adaptability: re-estimate, salvage reusable work, re-align the team, and reset stakeholder expectations quickly."),
+    ("You are new to the team and notice an inefficient process everyone accepts. What do you do?", "situational", "all", ANY, ANY, "medium",
+     "Understand why it exists first, quantify the cost, then propose a small pilot instead of criticising."),
+    ("An important stakeholder is unresponsive and your work is blocked. What do you do?", "situational", "all", ANY, ANY, "easy",
+     "Show ownership: try other channels, find who else can unblock you, keep working on what is not blocked, escalate with context."),
+    ("You realise you promised a customer something the product cannot do. What next?", "situational", "sales", ("sales executive", "account manager"), ANY, "hard",
+     "Correct it fast and honestly, offer the closest real alternative, and loop in product — trust beats one deal."),
+    ("Production goes down during a festival sale and the senior engineer is unreachable. What do you do?", "situational", "it", ("software engineer", "devops engineer", "sre"), ("Flipkart", "Amazon", "Paytm"), "hard",
+     "Follow the runbook: mitigate first (rollback/failover), communicate status, escalate broadly, and leave root cause for later."),
+    ("Two of your stakeholders give you directly conflicting requirements. How do you resolve it?", "situational", "product", ("product manager", "business analyst"), ANY, "medium",
+     "Make the conflict explicit: map both to user/business outcomes, get the decider in one room, and document the trade-off."),
+
+    # --- Managerial / leadership ---
+    ("How do you handle an underperforming team member?", "managerial", "all", ANY, ANY, "medium",
+     "Diagnose before judging: set clear expectations, give specific feedback, coach with a timeline, and document the plan."),
+    ("Two senior people on your team are in constant conflict. How do you fix it?", "managerial", "all", ANY, ANY, "hard",
+     "Address it early, hear both privately, refocus on shared goals, and set behavioural ground rules — don't hope it resolves itself."),
+    ("How do you delegate work across a team with mixed experience levels?", "managerial", "all", ANY, ANY, "medium",
+     "Match stretch to capability: delegate outcomes not steps, pair juniors with reviewers, and keep the critical path with proven hands."),
+    ("How do you give difficult feedback to someone senior to you in age or tenure?", "managerial", "all", ANY, ANY, "medium",
+     "Be specific, private and respectful: focus on behaviour and impact, not personality, and invite their view first."),
+    ("Your team is demotivated after a failed project. How do you rebuild morale?", "managerial", "all", ANY, ANY, "medium",
+     "Run a blameless retrospective, celebrate what worked, set a small early win, and shield the team from blame politics."),
+    ("How do you retain a high performer who has an offer from a competitor?", "managerial", "all", ANY, ("TCS", "Infosys", "Wipro"), "hard",
+     "Understand what pulls them (growth, pay, manager), act fast on what you control, and never counter-offer resentfully."),
+    ("How do you prioritise when your team has more work than capacity?", "managerial", "all", ANY, ANY, "medium",
+     "Make capacity visible, rank by business impact with stakeholders, and say no explicitly — an unranked backlog is a broken promise."),
+    ("How would you onboard a new joiner so they are productive in 30 days?", "managerial", "all", ANY, ANY, "easy",
+     "A written 30-day plan: a buddy, one small shippable task in week one, scheduled check-ins, and clear success criteria."),
+    ("A key deliverable will miss its date. How do you communicate this upward?", "managerial", "all", ANY, ANY, "medium",
+     "Early, with options: state the slip, the cause, the recovery plan with dates, and what you need — never surprise your boss late."),
+    ("How do you measure your team's performance beyond individual output?", "managerial", "all", ANY, ANY, "hard",
+     "Blend delivery metrics (cycle time, quality) with health signals (attrition, engagement) and outcomes over activity."),
+
+    # --- More behavioral depth ---
+    ("Tell me about a time you had to deliver results with no budget or resources.", "behavioral", "all", ANY, ANY, "medium",
+     "Show resourcefulness: borrowed skills, free tools, phased scope — and quantify what you still delivered."),
+    ("Describe a time you received harsh feedback. How did you respond?", "behavioral", "all", ANY, ANY, "medium",
+     "Show coachability: you listened without defensiveness, acted on it, and can name what changed afterwards."),
+    ("Tell me about a time you persuaded a group to adopt your idea.", "behavioral", "all", ANY, ("Amazon", "Flipkart", "McKinsey & Company"), "medium",
+     "Influence without authority: data, a pilot, and addressing objections one stakeholder at a time."),
+    ("Describe the most ambiguous problem you have solved.", "behavioral", "all", ANY, ("Amazon", "Google"), "hard",
+     "Show structure: how you framed the problem, the assumptions you made explicit, and how you validated them."),
+
+    # --- More HR (freshers and common screens) ---
+    ("Why did you choose your field of study, and how does it connect to this role?", "hr", "all", ANY, ANY, "easy",
+     "Freshers: connect coursework or projects to the job's day-to-day skills; avoid 'my parents chose it'."),
+    ("Are you willing to sign a service agreement or bond?", "hr", "all", ANY, ("TCS", "Infosys", "Wipro", "HCL"), "medium",
+     "Know the terms before the interview. It is fine to ask clarifying questions about duration and exit conditions."),
+    ("How do you keep your skills updated?", "hr", "all", ANY, ANY, "easy",
+     "Name specific, current sources — a course, a certification, a project — not a vague 'I read articles'."),
+    ("What does work-life balance mean to you?", "hr", "all", ANY, ANY, "easy",
+     "Show you can sustain performance: boundaries plus flexibility for genuine crunches, without sounding rigid or burnt out."),
 ]
 
 

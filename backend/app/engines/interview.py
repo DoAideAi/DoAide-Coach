@@ -43,10 +43,11 @@ async def generate_questions(
 Role: {role or "general"}; Company: {company or "a typical Indian employer in this industry"};
 Industry: {industry or "general"}; Experience level: {level}.
 Ask exactly {count} questions in the order a real interviewer would. Start with an introduction question,
-mix behavioral and role-specific technical questions suited to the level, and end with an HR question.
+mix behavioral, situational and role-specific technical questions suited to the level (add managerial
+questions for senior candidates), and end with an HR question.
 If a company is given, reflect its known interview style and values.
 
-Return JSON: {{"questions": [{{"question": "...", "category": "behavioral|technical|hr", "tip": "one-line hint on what a great answer covers"}}]}}"""
+Return JSON: {{"questions": [{{"question": "...", "category": "behavioral|technical|hr|situational|managerial", "tip": "one-line hint on what a great answer covers"}}]}}"""
     ai = await gemini.generate_json(prompt, temperature=0.8)
     if ai and isinstance(ai.get("questions"), list):
         qs = []

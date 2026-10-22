@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { Link, useSearchParams } from 'react-router-dom'
 import CopyButton from '../components/Copy'
 import Seo, { faq, webApp } from '../components/Seo'
 import {
@@ -54,7 +55,8 @@ function Chips({ items, tone }) {
 
 export default function Resume() {
   const { user, sync } = useAuth()
-  const [form, setForm] = useState({ resume: '', job_description: '', target_role: '' })
+  const [params] = useSearchParams()
+  const [form, setForm] = useState({ resume: '', job_description: '', target_role: params.get('role') || '' })
   const [result, setResult] = useState(null)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
@@ -166,6 +168,20 @@ export default function Resume() {
                 </li>
               ))}
             </ul>
+          </Card>
+          <Card className="flex flex-col gap-3 border-brand-200 bg-brand-50/50 sm:flex-row sm:items-center sm:justify-between">
+            <div>
+              <h3 className="font-bold text-ink">Resume sorted? Now practise the interview</h3>
+              <p className="mt-0.5 text-sm text-ink-soft">
+                Run a {form.target_role ? `${form.target_role} ` : ''}mock interview and get rated answers question by question.
+              </p>
+            </div>
+            <Link
+              to={`/interview${form.target_role ? `?role=${encodeURIComponent(form.target_role)}` : ''}`}
+              className="inline-flex min-h-11 shrink-0 items-center justify-center rounded-xl bg-brand-700 px-4 py-2.5 text-sm font-semibold text-white hover:bg-brand-800"
+            >
+              Start a mock interview →
+            </Link>
           </Card>
           <div className="flex flex-col gap-2">
             <ShareBar text={`My resume scored ${result.score}/100 on DoAide Coach's resume matcher.`} />

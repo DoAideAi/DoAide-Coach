@@ -4,8 +4,10 @@ import { describe, expect, it, vi } from 'vitest'
 import ErrorBoundary from '../components/ErrorBoundary'
 import { api } from '../lib/api'
 import { clearDraft, loadDraft, saveDraft } from '../lib/storage'
-import Interview from '../pages/Interview'
+import Interview, { AnswerTimer, TARGET_SECONDS, formatClock } from '../pages/Interview'
 import Intro from '../pages/Intro'
+import Resume from '../pages/Resume'
+import Star from '../pages/Star'
 import { mockFetch, renderPage } from './utils'
 
 const QUESTIONS = [
@@ -156,3 +158,98 @@ describe('"Tell me about yourself" writer', () => {
     expect(await screen.findByRole('alert')).toHaveTextContent('Slow down')
   })
 })
+
+describe('interview timer', () => {
+  it('formats the clock', () => {
+    expect(formatClock(0)).toBe('0:00')
+    expect(formatClock(65)).toBe('1:05')
+    expect(formatClock(TARGET_SECONDS)).toBe('2:00')
+  })
+
+  it('shows the timer at 0:00 when a question appears', async () => {
+    const user = userEvent.setup()
+    mockFetch({
+      'POST /api/interview/start': { session_id: 's', questions: QUESTIONS, source: 'fallback' },
+    })
+    renderPage(<Interview />, { path: '/interview' })
+    await user.click(screen.getByRole('button', { name: 'Start interview' }))
+    expect(await screen.findByTestId('answer-timer')).toHaveTextContent('0:00')
+  })
+
+  it('warns once past the 2 minute target', () => {
+    render(<AnswerTimer seconds={TARGET_SECONDS + 30} />)
+    expect(screen.getByTestId('answer-timer')).toHaveTextContent('2:30 · wrap up')
+  })
+})
+
+describe('resume and interview cross-links', () => {
+  it('prefills the target role from ?role= and links back to the interview after scoring', async () => {
+    const user = userEvent.setup()
+    mockFetch({
+      'POST /api/resume/score': {
+        score: 72, keyword_score: 70, structure_score: 75, summary: 'Decent match.',
+        missing_keywords: [], matched_keywords: ['sql'], suggestions: ['Add numbers'], strengths: [],
+        checks: { contact_email: true }, source: 'fallback',
+      },
+    })
+    renderPage(<Resume />, { path: '/resume?role=Data%20Analyst' })
+    expect(screen.getByLabelText('Target role (optional)')).toHaveValue('Data Analyst')
+    await user.type(screen.getByLabelText(/Your resume/), 'x'.repeat(60))
+    await user.type(screen.getByLabelText(/Job description/), 'y'.repeat(40))
+    await user.click(screen.getByRole('button', { name: 'Score my resume' }))
+    const link = await screen.findByRole('link', { name: /Start a mock interview/ })
+    expect(link).toHaveAttribute('href', '/interview?role=Data%20Analyst')
+  })
+
+  it('offers a resume check after finishing an interview', async () => {
+    const user = userEvent.setup()
+    mockFetch({
+      'POST /api/interview/start': { session_id: 's', questions: [QUESTIONS[0]], source: 'fallback' },
+      'POST /api/interview/feedback': FEEDBACK,
+    })
+    renderPage(<Interview />, { path: '/interview' })
+    await user.type(screen.getByLabelText('Role'), 'QA Engineer')
+    await user.click(screen.getByRole('button', { name: 'Start interview' }))
+    await user.type(await screen.findByLabelText('Your answer'), 'An answer')
+    await user.click(screen.getByRole('button', { name: 'Get feedback' }))
+    await screen.findByText('Good start')
+    await user.click(screen.getByRole('button', { name: 'Finish interview' }))
+    const link = screen.getByRole('link', { name: /Score my resume/ })
+    expect(link).toHaveAttribute('href', '/resume?role=QA%20Engineer')
+  })
+})
+
+describe('STAR answer generator', () => {
+  it('validates inputs before calling the API', async () => {
+    const user = userEvent.setup()
+    const calls = mockFetch()
+    renderPage(<Star />, { path: '/star-method' })
+    expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent('STAR method answer generator')
+    await user.click(screen.getByRole('button', { name: 'Write my STAR answer' }))
+    expect(screen.getByRole('alert')).toHaveTextContent('Describe the situation')
+    expect(calls.some((c) => c.path === '/api/star/generate')).toBe(false)
+  })
+
+  it('sends the story and shows the structured answer with tips', async () => {
+    const user = userEvent.setup()
+    const calls = mockFetch({
+      'POST /api/star/generate': {
+        answer: 'Our release was at risk. I cut scope and we shipped 1 day early.',
+        tips: ['Name the client industry'], source: 'ai', word_count: 13, speaking_seconds: 6,
+      },
+    })
+    renderPage(<Star />, { path: '/star-method' })
+    await user.type(screen.getByLabelText(/Situation/), 'Release due in two weeks, teammate fell sick')
+    await user.type(screen.getByLabelText(/^Task/), 'deliver the module on time')
+    await user.type(screen.getByLabelText(/^Action/), 'I cut scope and automated the test data')
+    await user.type(screen.getByLabelText(/^Result/), 'shipped 1 day early')
+    await user.click(screen.getByRole('button', { name: 'Write my STAR answer' }))
+    expect(await screen.findByTestId('star-text')).toHaveTextContent('shipped 1 day early')
+    expect(screen.getByTestId('star-stats')).toHaveTextContent('13 words · about 6 seconds')
+    expect(screen.getByText('Name the client industry')).toBeInTheDocument()
+    const post = calls.find((c) => c.path === '/api/star/generate')
+    expect(post.body).toMatchObject({ task: 'deliver the module on time' })
+    expect(screen.getByRole('link', { name: /Practise it in a mock interview/ })).toHaveAttribute('href', '/interview')
+  })
+})
+

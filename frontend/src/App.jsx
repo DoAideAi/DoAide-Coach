@@ -13,6 +13,7 @@ const PAGES = {
   salary: () => import('./pages/Salary'),
   dashboard: () => import('./pages/Dashboard'),
   intro: () => import('./pages/Intro'),
+  star: () => import('./pages/Star'),
   notFound: () => import('./pages/NotFound'),
 }
 const Interview = lazy(PAGES.interview)
@@ -21,6 +22,7 @@ const Questions = lazy(PAGES.questions)
 const Salary = lazy(PAGES.salary)
 const Dashboard = lazy(PAGES.dashboard)
 const Intro = lazy(PAGES.intro)
+const Star = lazy(PAGES.star)
 const NotFound = lazy(PAGES.notFound)
 
 export const preloadPages = () => Promise.all(Object.values(PAGES).map((load) => load()))
@@ -51,6 +53,7 @@ export default function App() {
           <Route path="salary" element={<Suspense fallback={<PageLoader />}><Salary /></Suspense>} />
           <Route path="dashboard" element={<Suspense fallback={<PageLoader />}><Dashboard /></Suspense>} />
           <Route path="tell-me-about-yourself" element={<Suspense fallback={<PageLoader />}><Intro /></Suspense>} />
+          <Route path="star-method" element={<Suspense fallback={<PageLoader />}><Star /></Suspense>} />
           <Route path="*" element={<Suspense fallback={<PageLoader />}><NotFound /></Suspense>} />
         </Route>
       </Routes>

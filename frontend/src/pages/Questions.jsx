@@ -12,6 +12,8 @@ const CATEGORIES = [
   ['behavioral', 'Behavioral'],
   ['technical', 'Technical'],
   ['hr', 'HR'],
+  ['situational', 'Situational'],
+  ['managerial', 'Managerial'],
 ]
 
 const DIFF = {

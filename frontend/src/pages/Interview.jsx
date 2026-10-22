@@ -16,6 +16,30 @@ const LEVELS = [
   ['senior', '8+ years'],
 ]
 
+// Real interviews expect about 2 minutes per answer; past that the chip turns amber.
+export const TARGET_SECONDS = 120
+
+export function formatClock(total) {
+  const m = Math.floor(total / 60)
+  const s = total % 60
+  return `${m}:${String(s).padStart(2, '0')}`
+}
+
+export function AnswerTimer({ seconds }) {
+  const over = seconds > TARGET_SECONDS
+  return (
+    <span
+      data-testid="answer-timer"
+      className={`inline-flex items-center gap-1 rounded-full px-2.5 py-0.5 text-xs font-semibold tabular-nums ${
+        over ? 'bg-amber-100 text-amber-900' : 'bg-slate-100 text-ink-soft'
+      }`}
+      title={over ? 'Real interviews expect about 2 minutes per answer' : 'Time on this question'}
+    >
+      ⏱ {formatClock(seconds)}{over ? ' · wrap up' : ''}
+    </span>
+  )
+}
+
 const FAQ = [
   ['How is my answer rated?', 'Each answer gets a score out of 10 based on relevance, structure (STAR for behavioral questions), specifics and measurable impact, along with improvements and a model answer.'],
   ['Can I practise for a specific company?', 'Yes. Enter a company like TCS, Infosys, Amazon or HDFC Bank and the questions reflect its known interview style.'],
@@ -141,12 +165,29 @@ function Summary({ setup, results, onRestart }) {
         </div>
         {score !== null && <div className="mt-3"><SavedNote /></div>}
       </Card>
+      <Card className="flex flex-col gap-3 border-brand-200 bg-brand-50/50 sm:flex-row sm:items-center sm:justify-between">
+        <div>
+          <h3 className="font-bold text-ink">Next step: get your resume past the ATS</h3>
+          <p className="mt-0.5 text-sm text-ink-soft">
+            Score your resume against a {setup.role ? `${setup.role} ` : ''}job description — match score, missing keywords and fixes.
+          </p>
+        </div>
+        <Link
+          to={`/resume${setup.role ? `?role=${encodeURIComponent(setup.role)}` : ''}`}
+          className="inline-flex min-h-11 shrink-0 items-center justify-center rounded-xl bg-brand-700 px-4 py-2.5 text-sm font-semibold text-white hover:bg-brand-800"
+        >
+          Score my resume →
+        </Link>
+      </Card>
       {results.map((r, i) => (
         <Card key={i}>
           <p className="text-xs font-semibold uppercase text-ink-muted">Q{i + 1} · {r.question.category}</p>
           <p className="mt-1 font-semibold">{r.question.question}</p>
           {r.feedback ? (
-            <p className="mt-2 text-sm text-ink-soft">Rating: <strong className="text-ink">{r.feedback.rating}/10</strong>. {r.feedback.verdict}</p>
+            <p className="mt-2 text-sm text-ink-soft">
+              Rating: <strong className="text-ink">{r.feedback.rating}/10</strong>
+              {r.seconds ? <span className="text-ink-muted"> · answered in {formatClock(r.seconds)}</span> : null}. {r.feedback.verdict}
+            </p>
           ) : (
             <p className="mt-2 text-sm text-ink-muted">Skipped</p>
           )}
@@ -186,7 +227,22 @@ export default function Interview() {
   const [done, setDone] = useState(false)
   const [showTip, setShowTip] = useState(false)
   const [draft, setDraft] = useState(() => loadDraft())
+  const [seconds, setSeconds] = useState(0)
   const topRef = useRef(null)
+
+  const currentForTimer = results[index]
+  const timerRunning = Boolean(setup && !done && currentForTimer && !currentForTimer.feedback)
+
+  // Per-question clock: starts when a question appears, stops at feedback.
+  useEffect(() => {
+    if (!timerRunning) return undefined
+    const id = setInterval(() => setSeconds((s) => s + 1), 1000)
+    return () => clearInterval(id)
+  }, [timerRunning, index])
+
+  useEffect(() => {
+    setSeconds(0)
+  }, [index, setup])
 
   // Keep the interview in progress (including a half-typed answer) in this browser.
   useEffect(() => {
@@ -254,7 +310,7 @@ export default function Interview() {
           level: setup.level,
         },
       })
-      setResults(results.map((r, i) => (i === index ? { ...r, answer, feedback: fb } : r)))
+      setResults(results.map((r, i) => (i === index ? { ...r, answer, feedback: fb, seconds } : r)))
     } catch (err) {
       setError(err.message)
     } finally {
@@ -323,10 +379,13 @@ export default function Interview() {
 
       {setup && !done && current && (
         <Card>
-          <div className="mb-3 flex items-center justify-between text-sm">
+          <div className="mb-3 flex items-center justify-between gap-2 text-sm">
             <span className="font-semibold text-brand-700">Question {index + 1} of {questions.length}</span>
-            <span className="rounded-full bg-slate-100 px-2.5 py-0.5 text-xs font-semibold capitalize text-ink-soft">
-              {current.question.category}
+            <span className="flex items-center gap-1.5">
+              {!current.feedback && <AnswerTimer seconds={seconds} />}
+              <span className="rounded-full bg-slate-100 px-2.5 py-0.5 text-xs font-semibold capitalize text-ink-soft">
+                {current.question.category}
+              </span>
             </span>
           </div>
           <div className="mb-4 h-1.5 overflow-hidden rounded-full bg-slate-100">

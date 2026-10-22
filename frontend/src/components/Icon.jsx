@@ -14,6 +14,8 @@ const PATHS = {
   whatsapp: 'M3 21l1.65-4.95A9 9 0 1 1 8 19.4zM9 9.5c0 3 2.5 5.5 5.5 5.5l1-1.5-2-1-1 1a4 4 0 0 1-2-2l1-1-1-2z',
   chevron: 'M6 9l6 6 6-6',
   close: 'M6 6l12 12M18 6 6 18',
+  star: 'M12 3l2.7 5.6 6.3.9-4.5 4.4 1 6.1-5.5-2.9-5.5 2.9 1-6.1L3 9.5l6.3-.9z',
+  timer: 'M12 8v5l3 2M12 3a9 9 0 1 0 9 9M12 3V1M10 1h4',
 }
 
 export default function Icon({ name, className = 'h-5 w-5' }) {

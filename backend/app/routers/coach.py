@@ -7,7 +7,7 @@ from typing import Literal
 from fastapi import APIRouter, Depends
 from pydantic import BaseModel, Field, model_validator
 
-from app.engines import interview, intro, resume, salary
+from app.engines import interview, intro, resume, salary, star
 from app.ratelimit import ai_rate_limit
 
 router = APIRouter(prefix="/api", dependencies=[Depends(ai_rate_limit)])
@@ -95,7 +95,22 @@ async def negotiate(body: SalaryIn) -> dict:
     return await salary.negotiation_plan(body.model_dump())
 
 
+class StarIn(BaseModel):
+    question: str = Field("", max_length=300)
+    situation: str = Field(..., min_length=10, max_length=800)
+    task: str = Field(..., min_length=5, max_length=600)
+    action: str = Field(..., min_length=10, max_length=1200)
+    result: str = Field(..., min_length=5, max_length=600)
+    learning: str = Field("", max_length=400)
+    role: str = Field("", max_length=80)
+
+
 @router.post("/intro/generate")
 async def generate_intro(body: IntroIn) -> dict:
     data = body.model_dump(exclude={"length"})
     return await intro.generate_intro(data, body.length)
+
+
+@router.post("/star/generate")
+async def generate_star(body: StarIn) -> dict:
+    return await star.generate_star(body.model_dump())

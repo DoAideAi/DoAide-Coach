@@ -44,6 +44,9 @@ export function Footer() {
         <Link to="/tell-me-about-yourself" className="inline-flex min-h-11 items-center font-semibold text-brand-700 hover:underline">
           &ldquo;Tell me about yourself&rdquo; answer writer
         </Link>
+        <Link to="/star-method" className="inline-flex min-h-11 items-center font-semibold text-brand-700 hover:underline">
+          STAR method answer generator
+        </Link>
         {/* Plain link: /guides is static HTML outside the SPA. */}
         <a href="/guides" className="inline-flex min-h-11 items-center font-semibold text-brand-700 hover:underline">
           Interview &amp; salary guides

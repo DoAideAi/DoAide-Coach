@@ -40,7 +40,7 @@ def test_questions_endpoint(client):
 
 def test_meta_endpoint(client):
     meta = client.get("/api/questions/meta").json()
-    assert meta["categories"] == ["behavioral", "technical", "hr"]
+    assert meta["categories"] == ["behavioral", "technical", "hr", "situational", "managerial"]
     assert "TCS" in meta["companies"] and "Flipkart" in meta["companies"]
     assert "software engineer" in meta["roles"]
     assert meta["total"] == len(qb.QUESTIONS)
