@@ -20,6 +20,8 @@ GUIDES = [
     "tcs-infosys-wipro-interview-process",
     "tell-me-about-yourself-answer",
     "ats-resume-keywords-india",
+    "ai-mock-interview-practice-free",
+    "top-interview-questions-india-2026",
 ]
 ROUTES = ["/", "/interview", "/resume", "/questions", "/salary", "/dashboard", "/tell-me-about-yourself", "/star-method", "/coach-vs-interviewbit", "/guides"]
 ROUTES += [f"/guides/{slug}" for slug in GUIDES]

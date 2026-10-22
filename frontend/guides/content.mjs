@@ -344,4 +344,137 @@ export const guides = [
     ],
     cta: ['/resume', 'Score your resume against a job description'],
   },
+  {
+    slug: 'ai-mock-interview-practice-free',
+    title: 'AI Mock Interview Practice Free: Rehearse Before the Real Thing (2026) | DoAide Coach',
+    h1: 'AI mock interview practice, free: rehearse before the real thing',
+    description:
+      'How free AI mock interview practice works, why rehearsing out loud beats reading answers, and a 7-day practice plan for Indian freshers and experienced candidates — no login, no payment.',
+    updated: '2026-10-22',
+    intro: `<p>Most candidates in India prepare for interviews by reading: question lists, "top answers" blogs, YouTube videos. Then the real interview starts, the mind goes blank, and a perfectly knowledgeable candidate rambles through "tell me about yourself". The gap is not knowledge — it is <strong>rehearsal</strong>. Speaking answers out loud, under light pressure, with feedback.</p>
+<p>That used to require a friend, a mentor or a paid coaching class. An <strong>AI mock interview</strong> gives you the same rehearsal free, any time of day, with no judgement and no scheduling. This guide explains how AI mock interviews work, what they can and cannot do, and a one-week practice plan that noticeably improves performance.</p>`,
+    sections: [
+      [
+        'what-it-is',
+        'What an AI mock interview actually does',
+        `<p>An AI mock interview simulates the question-answer loop of a real interview:</p>
+<ul>
+<li><strong>It asks real questions</strong> — HR, behavioural, situational and role-based — the way an interviewer would, one at a time.</li>
+<li><strong>You answer in your own words</strong>, ideally out loud, as you would across the table.</li>
+<li><strong>It evaluates your answer</strong>: structure, relevance, specificity, confidence markers — and gives instant feedback with a better version.</li>
+<li><strong>It adapts.</strong> Follow-up questions probe the weak parts of your answer, just like a good interviewer.</li>
+</ul>
+<p>On <a href="/interview">DoAide Coach</a> this is free and needs no login: choose your role and experience level, and the interview starts. Practise HR rounds, behavioural rounds or role-specific questions, with a <a href="/star-method">STAR answer generator</a> when you get stuck structuring a story.</p>`,
+      ],
+      [
+        'why-it-works',
+        'Why rehearsing out loud beats reading answers',
+        `<ul>
+<li><strong>Retrieval practice.</strong> Reading an answer feels like knowing it; producing it from memory is what the interview demands. Practice the production, not the recognition.</li>
+<li><strong>Fluency is trainable.</strong> The first time you say "my biggest strength is..." out loud, you stumble. The fifth time, you do not. Interviewers read that fluency as confidence and clarity.</li>
+<li><strong>You discover your filler habits.</strong> "Basically", "like", "you know", trailing off mid-sentence — you cannot fix what you have never heard yourself do.</li>
+<li><strong>Pressure inoculation.</strong> Even mild simulated pressure (a timer, an unexpected follow-up) reduces the shock of the real thing. The <a href="/interview">mock interview</a> includes an optional timer for exactly this reason.</li>
+<li><strong>Feedback loops are tight.</strong> In a coaching class you get feedback on two answers a week. With AI you can get feedback on twenty answers in an evening.</li>
+</ul>`,
+      ],
+      [
+        'practice-plan',
+        'A 7-day AI mock interview practice plan',
+        `<ol>
+<li><strong>Day 1 — Baseline.</strong> Do one full <a href="/interview">mock interview</a> cold. Do not prepare. Note your score and the questions that hurt.</li>
+<li><strong>Day 2 — Your story.</strong> Fix "tell me about yourself" first; it sets the tone of every interview. Use the <a href="/tell-me-about-yourself">answer writer</a>, then rehearse it aloud until the 60-90 second version is automatic.</li>
+<li><strong>Day 3 — Behavioural stories.</strong> Prepare 4-5 STAR stories (conflict, failure, leadership, deadline, initiative) with the <a href="/star-method">STAR generator</a>. One strong story can answer many questions.</li>
+<li><strong>Day 4 — Role questions.</strong> Run a role-specific round from the <a href="/questions">question bank</a> for your profile (developer, analyst, sales, HR...).</li>
+<li><strong>Day 5 — Weak spots.</strong> Repeat only the questions you scored lowest on. Improvement here is fastest.</li>
+<li><strong>Day 6 — Full dress rehearsal.</strong> Complete interview, timer on, sitting as you would on camera. Compare the score with Day 1.</li>
+<li><strong>Day 7 — Logistics round.</strong> Prepare salary discussion with our <a href="/guides/how-to-negotiate-salary-india">negotiation guide</a> and the <a href="/salary">salary tool</a>, and your questions for the interviewer.</li>
+</ol>`,
+      ],
+      [
+        'limits',
+        'What AI practice cannot do (and how to cover it)',
+        `<p>Be honest about the limits. An AI mock interview cannot replicate panel dynamics, a stressed interviewer having a bad day, or the small talk that builds rapport. It also cannot verify deep technical skill the way a live coding round does.</p>
+<p>Cover those separately: one live mock with a friend or senior for the human element, and standard technical prep for your stack. Use AI practice for what it does best — unlimited, judgement-free rehearsal of the verbal 80% of every interview. Freshers should pair this with our <a href="/guides/hr-interview-questions-for-freshers">HR questions for freshers</a> guide; service-company applicants should read the <a href="/guides/tcs-infosys-wipro-interview-process">TCS/Infosys/Wipro process guide</a>.</p>`,
+      ],
+    ],
+    faqs: [
+      ['Is AI mock interview practice really free on DoAide Coach?', 'Yes. The mock interview, question bank, STAR generator and feedback are free and work in the browser without creating an account.'],
+      ['How many mock interviews should I do before the real one?', 'Three to five focused sessions produce a visible improvement for most candidates. One cold baseline, two or three targeted at weak answers, and one full dress rehearsal the day before.'],
+      ['Does AI interview practice work for freshers?', 'Especially well. Freshers rarely have access to seniors or paid coaching, and the questions freshers face (strengths, relocation, why this company) are highly rehearsable. Start with the HR round and build confidence.'],
+      ['Can I practise in Hindi or Hinglish?', 'You can answer in the language you are comfortable with, but if your target interview is in English, practise in English — fluency under pressure is exactly the skill being trained.'],
+      ['Will interviewers know I practised with AI?', 'They will only notice that you answer in clear, structured, specific sentences. Rehearsal is what every strong candidate does; AI just makes it free and unlimited.'],
+    ],
+    cta: ['/interview', 'Start a free AI mock interview now'],
+  },
+  {
+    slug: 'top-interview-questions-india-2026',
+    title: 'Top Interview Questions in India 2026: HR, Behavioural & Role-Based (With Answers) | DoAide Coach',
+    h1: 'Top interview questions in India 2026 — and how to answer them',
+    description:
+      'The interview questions Indian candidates face most in 2026 — HR, behavioural, situational and role-based — with answer frameworks, examples and the mistakes that cost offers.',
+    updated: '2026-10-22',
+    intro: `<p>Interviews in India follow patterns. Whether you are a fresher facing a campus HR round or an experienced engineer in a product-company loop, most questions come from a predictable core — and interviewers are not testing whether you have heard the question before, but whether your answer is <strong>structured, specific and honest</strong>.</p>
+<p>This guide covers the questions asked most across Indian interviews in 2026, grouped by round, with a framework for each. Rehearse them out loud in a <a href="/interview">free AI mock interview</a> rather than just reading — that is the difference between knowing an answer and delivering it.</p>`,
+    sections: [
+      [
+        'hr-round',
+        'The HR round: 10 questions you will almost certainly face',
+        `<ol>
+<li><strong>Tell me about yourself.</strong> 60-90 seconds: present → past → why this role. Build yours with the <a href="/tell-me-about-yourself">answer writer</a>.</li>
+<li><strong>Why do you want to join us?</strong> One specific fact about the company + one honest link to your goals. Generic praise is a red flag.</li>
+<li><strong>What are your strengths?</strong> Two strengths, each with a 15-second example. Claimed without evidence, strengths count for nothing.</li>
+<li><strong>What is your biggest weakness?</strong> A real, non-fatal weakness + what you are doing about it. "I am a perfectionist" has been dead for years.</li>
+<li><strong>Where do you see yourself in 5 years?</strong> Ambition inside the company's realistic path, not a specific designation.</li>
+<li><strong>Why are you leaving your current job?</strong> Forward-looking reasons (growth, scope, learning). Never badmouth the current employer.</li>
+<li><strong>What are your salary expectations?</strong> A researched range, not a number pulled from hope. Prepare with the <a href="/guides/how-to-negotiate-salary-india">salary negotiation guide</a>.</li>
+<li><strong>Are you open to relocation / night shifts?</strong> Decide before the interview; a confident yes or a conditional, honest answer both beat visible hesitation.</li>
+<li><strong>Explain the gap in your resume.</strong> Brief, factual, ending with what you did during it (upskilling, family responsibility, freelancing).</li>
+<li><strong>Do you have any questions for us?</strong> Always have two: one about the role's first 90 days, one about the team. "No questions" reads as no interest.</li>
+</ol>
+<p>Freshers: the campus variants of these are covered in depth in <a href="/guides/hr-interview-questions-for-freshers">HR interview questions for freshers</a>.</p>`,
+      ],
+      [
+        'behavioural',
+        'Behavioural and situational questions: the STAR five',
+        `<p>Behavioural questions ("tell me about a time when...") dominate mid-level interviews in 2026, and situational ones ("what would you do if...") are their forward-looking twin. Five prepared stories cover almost all of them:</p>
+<ul>
+<li><strong>Conflict:</strong> a disagreement with a colleague or manager, resolved professionally.</li>
+<li><strong>Failure:</strong> a genuine mistake, what it cost, what changed afterwards.</li>
+<li><strong>Deadline/pressure:</strong> delivering under constraint, and the trade-offs you chose.</li>
+<li><strong>Leadership/initiative:</strong> a time you acted beyond your role without being asked.</li>
+<li><strong>Learning:</strong> picking up a skill or domain quickly because the work demanded it.</li>
+</ul>
+<p>Structure each with STAR — Situation, Task, Action, Result — in about 90 seconds, with a number in the Result wherever possible ("reduced processing time 30%", "recovered ₹2 lakh of pending collections"). The <a href="/star-method">STAR answer generator</a> turns a rough memory into a structured story you can rehearse.</p>`,
+      ],
+      [
+        'role-based',
+        'Role-based questions in 2026: what has changed',
+        `<p>Beyond HR and behavioural rounds, expect role-specific screens — and in 2026 two shifts are visible across Indian hiring:</p>
+<ul>
+<li><strong>AI tool fluency is now a standard question.</strong> "How do you use AI tools in your work?" appears in developer, analyst, marketing and content interviews alike. Have a concrete, honest answer: which tools, for what, and where you still apply your own judgement.</li>
+<li><strong>Depth beats breadth.</strong> Interviewers increasingly pick one project from your resume and drill: why this design, what failed, what would you change. One project you can defend for 15 minutes is worth five you can only describe for one.</li>
+</ul>
+<p>Practise role-specific sets — developer, data analyst, sales, HR, customer support and more — in the <a href="/questions">question bank</a>, and make sure the keywords on your resume match what you can actually defend (see <a href="/guides/ats-resume-keywords-india">ATS resume keywords</a>).</p>`,
+      ],
+      [
+        'mistakes',
+        'The five mistakes that cost offers',
+        `<ol>
+<li><strong>Memorised-sounding answers.</strong> Interviewers hear the same recited lines daily. Rehearse ideas and structure, not scripts.</li>
+<li><strong>No numbers.</strong> "Improved performance" vs "cut load time from 4s to 1.2s" — specificity is credibility.</li>
+<li><strong>Badmouthing an employer.</strong> However justified, it transfers the negativity to you.</li>
+<li><strong>Not asking anything.</strong> Questions signal seriousness; silence signals a backup option.</li>
+<li><strong>Zero rehearsal.</strong> Reading guides (including this one) without speaking the answers aloud. Fix that today with a <a href="/interview">free mock interview</a> — the first one takes 15 minutes.</li>
+</ol>`,
+      ],
+    ],
+    faqs: [
+      ['What are the most common interview questions in India in 2026?', 'Tell me about yourself, why should we hire you, strengths and weaknesses, salary expectations, reason for leaving, and behavioural questions like describing a conflict or failure. Role-based rounds increasingly add questions about how you use AI tools in your work.'],
+      ['How do I answer "tell me about yourself"?', 'Use a 60-90 second present-past-future structure: your current role or studies, the experience that led here, and why this role fits your goals. End on the role, not your hobbies.'],
+      ['What is the STAR method?', 'Situation, Task, Action, Result — a structure for behavioural answers. Describe the context briefly, your specific responsibility, the actions you personally took, and a measurable outcome.'],
+      ['How long should interview answers be?', 'HR answers: 30-90 seconds. Behavioural stories: about 90 seconds. If the interviewer wants more, they will ask follow-ups — leaving room for them is good interviewing.'],
+      ['How should freshers prepare differently from experienced candidates?', 'Freshers should lead with projects, internships and learning speed since there is no work history to probe, and prepare the campus-HR staples (relocation, bond, shift flexibility). Experienced candidates should prepare to defend resume claims in depth and to discuss salary with researched numbers.'],
+    ],
+    cta: ['/interview', 'Practise these questions in a free mock interview'],
+  },
 ]
