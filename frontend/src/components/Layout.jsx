@@ -50,6 +50,15 @@ export function Footer() {
         <Link to="/coach-vs-interviewbit" className="inline-flex min-h-11 items-center font-semibold text-brand-700 hover:underline">
           DoAide Coach vs InterviewBit
         </Link>
+        <Link to="/industry-questions" className="inline-flex min-h-11 items-center font-semibold text-brand-700 hover:underline">
+          Industry question banks
+        </Link>
+        <Link to="/resume-questions" className="inline-flex min-h-11 items-center font-semibold text-brand-700 hover:underline">
+          Resume → Interview questions
+        </Link>
+        <Link to="/tips" className="inline-flex min-h-11 items-center font-semibold text-brand-700 hover:underline">
+          Interview tips &amp; checklist
+        </Link>
         {/* Plain link: /guides is static HTML outside the SPA. */}
         <a href="/guides" className="inline-flex min-h-11 items-center font-semibold text-brand-700 hover:underline">
           Interview &amp; salary guides

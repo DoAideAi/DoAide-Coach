@@ -477,4 +477,106 @@ export const guides = [
     ],
     cta: ['/interview', 'Practise these questions in a free mock interview'],
   },
+  {
+    slug: 'complete-interview-preparation-guide-2026',
+    title: 'Complete Interview Preparation Guide for 2026 — Step by Step | DoAide Coach',
+    h1: 'Complete interview preparation guide for 2026',
+    description:
+      'A step-by-step plan to prepare for job interviews in India in 2026: timeline, common questions, STAR method, salary negotiation, virtual interviews and follow-up.',
+    updated: '2026-10-23',
+    intro: `<p>Whether you are a fresher stepping into your first placement season or an experienced professional switching roles, interview preparation follows the same disciplined path: <strong>research → practise → execute → follow up</strong>. This guide gives you a concrete timeline and checklist so nothing falls through the cracks.</p>`,
+    sections: [
+      [
+        'timeline',
+        'Preparation timeline — from 2 weeks to interview day',
+        `<table>
+<thead><tr><th>When</th><th>What to do</th></tr></thead>
+<tbody>
+<tr><td><strong>Day 1-3</strong></td><td>Research the company: products, competitors, recent news, Glassdoor reviews. Read the job description line by line and note which skills you can prove.</td></tr>
+<tr><td><strong>Day 4-5</strong></td><td>Prepare 5-6 STAR stories covering teamwork, leadership, conflict, failure, initiative and a technical challenge. Write them down, then reduce to bullet points.</td></tr>
+<tr><td><strong>Day 6-8</strong></td><td>Practise mock interviews. Use <a href="/interview">DoAide Coach's AI mock interview</a> for instant feedback. Record yourself to check pacing and filler words.</td></tr>
+<tr><td><strong>Day 9-10</strong></td><td>Deep-dive into role-specific prep: system design for engineers, case studies for consultants, market sizing for PMs, regulatory knowledge for finance.</td></tr>
+<tr><td><strong>Day 11-12</strong></td><td>Research salary range (AmbitionBox, Glassdoor, Levels.fyi for tech). Decide your ideal and walk-away number.</td></tr>
+<tr><td><strong>Day 13</strong></td><td>Final mock: simulate the full loop — HR, technical, behavioral — back to back. Time each answer.</td></tr>
+<tr><td><strong>Day 14 (Eve)</strong></td><td>Print resume, lay out outfit, confirm logistics, sleep 7-8 hours.</td></tr>
+</tbody></table>`,
+      ],
+      [
+        'common-questions',
+        'The 10 questions you will almost certainly face',
+        `<ol>
+<li><strong>Tell me about yourself.</strong> 60-90 seconds, present → past → future. End on why this role fits.</li>
+<li><strong>Why this company?</strong> Name something specific: a product you use, a value you share, or a recent initiative.</li>
+<li><strong>What are your strengths?</strong> Pick 2-3 that match the JD, give a quick proof point for each.</li>
+<li><strong>What is your biggest weakness?</strong> Name a real one, then explain what you are doing to fix it.</li>
+<li><strong>Where do you see yourself in 5 years?</strong> Show ambition aligned with the company, not "in your chair".</li>
+<li><strong>Why are you leaving your current role?</strong> Focus on growth, learning or mission — never badmouth.</li>
+<li><strong>Tell me about a time you failed.</strong> STAR with genuine failure, emphasise what you learned and changed.</li>
+<li><strong>How do you handle pressure?</strong> Give a concrete example: deadline, scope change, production incident.</li>
+<li><strong>What is your expected salary?</strong> Give a researched range, not a single number. Ask about total comp.</li>
+<li><strong>Do you have questions for us?</strong> Always. Ask about team structure, success metrics for the role, or growth paths.</li>
+</ol>
+<p>Practise all ten in a <a href="/interview">free AI mock interview</a> — the AI rates your answer and suggests a model response.</p>`,
+      ],
+      [
+        'star-method',
+        'STAR method — structure every behavioral answer',
+        `<p>The <strong>STAR method</strong> turns a rambling story into a crisp, persuasive answer:</p>
+<ol>
+<li><strong>Situation:</strong> Set the scene in 1-2 sentences. Where were you, what was happening?</li>
+<li><strong>Task:</strong> What was your specific responsibility? Not the team's — yours.</li>
+<li><strong>Action:</strong> What did you do? Be detailed and personal: "I" not "we".</li>
+<li><strong>Result:</strong> Quantify the outcome. Revenue, time saved, NPS, user growth — numbers stick.</li>
+</ol>
+<p>Prepare 5-6 STAR stories that cover leadership, teamwork, conflict, failure, initiative and a technical win. You will reuse the same stories across multiple questions.</p>
+<p>Need help structuring your STAR answers? Try the <a href="/star-method">STAR method answer generator</a>.</p>`,
+      ],
+      [
+        'salary-negotiation',
+        'Salary negotiation — how to get what you deserve',
+        `<ul>
+<li><strong>Research first.</strong> Check AmbitionBox, Glassdoor, and Levels.fyi (for tech). Know the 25th, 50th and 75th percentile for your role and location.</li>
+<li><strong>Delay the number.</strong> If asked in the HR screen, say "I'd like to understand the full role before discussing numbers."</li>
+<li><strong>Give a range, not a point.</strong> Set the bottom of your range at your ideal number.</li>
+<li><strong>Negotiate total comp.</strong> Base, bonus, RSUs, joining bonus, relocation, work-from-home allowance — everything is negotiable.</li>
+<li><strong>Get it in writing.</strong> A verbal "yes" is not an offer. Wait for the offer letter before resigning.</li>
+<li><strong>Be polite and firm.</strong> Negotiation is expected. No one rescinds an offer because you asked for more.</li>
+</ul>
+<p>Use the <a href="/salary">salary calculator</a> to see your in-hand pay after taxes and deductions.</p>`,
+      ],
+      [
+        'virtual-interviews',
+        'Virtual interview best practices',
+        `<ul>
+<li>Test camera, mic and internet 30 minutes before the call.</li>
+<li>Use a wired connection if possible — Wi-Fi drops at the worst moment.</li>
+<li>Sit facing a window for natural light. A ring light is a cheap backup.</li>
+<li>Close all other tabs and apps. Notifications are distracting.</li>
+<li>Look at the camera, not the screen, when speaking.</li>
+<li>Keep a notepad for questions — typing sounds come through the mic.</li>
+<li>Dress formally from head to toe. You might need to stand up.</li>
+<li>Have a phone number ready to switch to audio if video fails.</li>
+</ul>`,
+      ],
+      [
+        'follow-up',
+        'After the interview — follow up and reflect',
+        `<ol>
+<li>Send a thank-you email within 24 hours. Reference something specific the interviewer said.</li>
+<li>Note every question you were asked and how you answered. This is your best study material for the next round or the next company.</li>
+<li>If you haven't heard back in 7 days, send a polite follow-up: one sentence asking for an update.</li>
+<li>Continue applying. Even if this interview went perfectly, a parallel pipeline reduces anxiety and gives you leverage.</li>
+</ol>`,
+      ],
+    ],
+    faqs: [
+      ['How long should I prepare for an interview?', 'Two weeks of focused prep is ideal. If you have less time, prioritise: research the company (1 day), prepare STAR stories (1 day), and do at least one mock interview (1 hour).'],
+      ['How many mock interviews should I do?', 'At least 3. One to get comfortable, one to refine, and one simulating the real format. More is better if time allows.'],
+      ['Should I memorise answers?', 'No. Memorised answers sound robotic and fall apart with follow-up questions. Prepare bullet points and practise speaking naturally around them.'],
+      ['How do I handle a question I do not know the answer to?', 'Say honestly that you do not know, then explain how you would find out. Interviewers value honesty and problem-solving more than pretending.'],
+      ['Is it okay to ask about salary in the first round?', 'It depends on the company. If HR brings it up, answer with a researched range. Otherwise, wait until the company expresses interest.'],
+      ['What if I get rejected?', 'Ask for feedback (many companies give it if you ask), study your notes, and improve for the next one. Most successful candidates faced several rejections before landing the right offer.'],
+    ],
+    cta: ['/interview', 'Start a free AI mock interview now'],
+  },
 ]

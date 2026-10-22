@@ -18,14 +18,31 @@ const LEVELS = [
 
 // Real interviews expect about 2 minutes per answer; past that the chip turns amber.
 export const TARGET_SECONDS = 120
+const COUNTDOWN_OPTIONS = [0, 30, 60, 90, 120, 180]
 
 export function formatClock(total) {
-  const m = Math.floor(total / 60)
-  const s = total % 60
+  const m = Math.floor(Math.abs(total) / 60)
+  const s = Math.abs(total) % 60
   return `${m}:${String(s).padStart(2, '0')}`
 }
 
-export function AnswerTimer({ seconds }) {
+export function AnswerTimer({ seconds, countdown = 0 }) {
+  if (countdown > 0) {
+    const remaining = countdown - seconds
+    const expired = remaining <= 0
+    const warning = remaining > 0 && remaining <= 10
+    return (
+      <span
+        data-testid="answer-timer"
+        className={`inline-flex items-center gap-1 rounded-full px-2.5 py-0.5 text-xs font-semibold tabular-nums ${
+          expired ? 'animate-pulse bg-red-100 text-red-900' : warning ? 'bg-amber-100 text-amber-900' : 'bg-green-50 text-green-800'
+        }`}
+        title={expired ? 'Time is up!' : `${remaining} seconds remaining`}
+      >
+        ⏱ {expired ? '0:00 · time up!' : formatClock(remaining)}
+      </span>
+    )
+  }
   const over = seconds > TARGET_SECONDS
   return (
     <span
@@ -48,7 +65,7 @@ const FAQ = [
 
 function Setup({ onStart, loading, initial }) {
   const [form, setForm] = useState({
-    role: '', company: '', industry: 'it', level: 'junior', count: 5, ...initial,
+    role: '', company: '', industry: 'it', level: 'junior', count: 5, countdown: 0, ...initial,
   })
   const [meta, setMeta] = useState({ companies: [], roles: [] })
   useEffect(() => {
@@ -86,6 +103,11 @@ function Setup({ onStart, loading, initial }) {
         <Field label="Number of questions" id="count">
           <select id="count" className={inputClass} value={form.count} onChange={set('count')}>
             {[3, 5, 8, 10].map((n) => <option key={n} value={n}>{n} questions</option>)}
+          </select>
+        </Field>
+        <Field label="Timer per question" id="countdown" hint="0 = no countdown, just a stopwatch">
+          <select id="countdown" className={inputClass} value={form.countdown} onChange={set('countdown')}>
+            {COUNTDOWN_OPTIONS.map((n) => <option key={n} value={n}>{n === 0 ? 'No countdown (stopwatch)' : `${n} seconds`}</option>)}
           </select>
         </Field>
         <div className="flex items-end">
@@ -382,7 +404,7 @@ export default function Interview() {
           <div className="mb-3 flex items-center justify-between gap-2 text-sm">
             <span className="font-semibold text-brand-700">Question {index + 1} of {questions.length}</span>
             <span className="flex items-center gap-1.5">
-              {!current.feedback && <AnswerTimer seconds={seconds} />}
+              {!current.feedback && <AnswerTimer seconds={seconds} countdown={Number(setup.countdown) || 0} />}
               <span className="rounded-full bg-slate-100 px-2.5 py-0.5 text-xs font-semibold capitalize text-ink-soft">
                 {current.question.category}
               </span>

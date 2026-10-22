@@ -2,7 +2,7 @@
   "rewrites": [
     { "source": "/guides/:slug([a-z0-9-]+)", "destination": "/guides/:slug/index.html" },
     { "source": "/guides", "destination": "/guides/index.html" },
-    { "source": "/:page(interview|resume|questions|salary|dashboard|tell-me-about-yourself|star-method|coach-vs-interviewbit)", "destination": "/index.html" }
+    { "source": "/:page(interview|resume|questions|salary|dashboard|tell-me-about-yourself|star-method|coach-vs-interviewbit|industry-questions|resume-questions|tips)", "destination": "/index.html" }
   ],
   "headers": [
     { "source": "/assets/**", "headers": [{ "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }] }
