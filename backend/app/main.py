@@ -21,7 +21,7 @@ GUIDES = [
     "tell-me-about-yourself-answer",
     "ats-resume-keywords-india",
 ]
-ROUTES = ["/", "/interview", "/resume", "/questions", "/salary", "/dashboard", "/tell-me-about-yourself", "/star-method", "/guides"]
+ROUTES = ["/", "/interview", "/resume", "/questions", "/salary", "/dashboard", "/tell-me-about-yourself", "/star-method", "/coach-vs-interviewbit", "/guides"]
 ROUTES += [f"/guides/{slug}" for slug in GUIDES]
 
 

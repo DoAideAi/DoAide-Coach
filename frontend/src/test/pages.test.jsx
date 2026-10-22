@@ -8,6 +8,7 @@ import Interview, { scoreSession } from '../pages/Interview'
 import Questions from '../pages/Questions'
 import Resume from '../pages/Resume'
 import Salary from '../pages/Salary'
+import VsInterviewBit from '../pages/VsInterviewBit'
 import { loadSessions, saveSessions } from '../lib/storage'
 import { mockFetch, renderPage } from './utils'
 
@@ -269,5 +270,20 @@ describe('Dashboard', () => {
     expect(pts[0]).toMatchObject({ x: 36, y: 72 })
     expect(pts[1]).toMatchObject({ x: 84, y: 16 })
     expect(chartPoints([{ score: 50 }], 100, 100)[0].x).toBe(60)
+  })
+})
+
+describe('Coach vs InterviewBit comparison page', () => {
+  it('renders the comparison table, SEO tags and FAQ JSON-LD', async () => {
+    mockFetch()
+    renderPage(<VsInterviewBit />)
+    expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent(/DoAide Coach vs InterviewBit/i)
+    expect(screen.getByRole('columnheader', { name: 'DoAide Coach' })).toBeInTheDocument()
+    expect(screen.getByRole('columnheader', { name: 'InterviewBit' })).toBeInTheDocument()
+    expect(screen.getByRole('link', { name: /Start a mock interview/ })).toHaveAttribute('href', '/interview')
+    await waitFor(() => expect(document.title).toMatch(/DoAide Coach vs InterviewBit/))
+    expect(document.querySelector('link[rel="canonical"]').href).toBe('https://coach.doaide.com/coach-vs-interviewbit')
+    const ld = [...document.querySelectorAll('script[type="application/ld+json"]')].map((s) => JSON.parse(s.textContent)['@type'])
+    expect(ld).toEqual(expect.arrayContaining(['FAQPage']))
   })
 })

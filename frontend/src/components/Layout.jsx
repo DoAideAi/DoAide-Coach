@@ -47,6 +47,9 @@ export function Footer() {
         <Link to="/star-method" className="inline-flex min-h-11 items-center font-semibold text-brand-700 hover:underline">
           STAR method answer generator
         </Link>
+        <Link to="/coach-vs-interviewbit" className="inline-flex min-h-11 items-center font-semibold text-brand-700 hover:underline">
+          DoAide Coach vs InterviewBit
+        </Link>
         {/* Plain link: /guides is static HTML outside the SPA. */}
         <a href="/guides" className="inline-flex min-h-11 items-center font-semibold text-brand-700 hover:underline">
           Interview &amp; salary guides
