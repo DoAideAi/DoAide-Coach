@@ -39,6 +39,10 @@ export function Footer() {
           A DoAide Product
         </a>
         <p>Free AI interview prep and career coaching for Indian job seekers.</p>
+        {/* Plain link: /guides is static HTML outside the SPA. */}
+        <a href="/guides" className="font-semibold text-brand-700 hover:underline">
+          Interview &amp; salary guides
+        </a>
         <p>&copy; {new Date().getFullYear()} DoAide. AI feedback is guidance, not a guarantee.</p>
       </div>
     </footer>

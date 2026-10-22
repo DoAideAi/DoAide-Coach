@@ -13,7 +13,10 @@ from app import db
 from app.config import settings
 from app.routers import account, coach, questions
 
-ROUTES = ["/", "/interview", "/resume", "/questions", "/salary", "/dashboard"]
+# Static guides rendered by frontend/scripts/build-guides.mjs; keep in sync with frontend/guides/content.mjs.
+GUIDES = ["hr-interview-questions-for-freshers", "how-to-negotiate-salary-india", "tcs-infosys-wipro-interview-process"]
+ROUTES = ["/", "/interview", "/resume", "/questions", "/salary", "/dashboard", "/guides"]
+ROUTES += [f"/guides/{slug}" for slug in GUIDES]
 
 
 @asynccontextmanager
@@ -76,6 +79,8 @@ def create_app() -> FastAPI:
             raise HTTPException(404, "Frontend not built. Run `npm run build` in frontend/.")
         # Serve real files from dist (favicon, og image); everything else is a client route.
         candidate = (dist / path).resolve()
+        if path and candidate.is_dir():
+            candidate = candidate / "index.html"  # prerendered guides
         if path and candidate.is_file() and candidate.is_relative_to(dist.resolve()):
             return FileResponse(candidate)
         return FileResponse(index)
