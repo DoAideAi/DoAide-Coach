@@ -7,7 +7,7 @@ import {
 } from '../components/ui'
 import { api } from '../lib/api'
 import { useAuth } from '../lib/auth'
-import { addSession } from '../lib/storage'
+import { addSession, clearDraft, loadDraft, saveDraft } from '../lib/storage'
 
 const LEVELS = [
   ['fresher', 'Fresher / campus'],
@@ -185,7 +185,28 @@ export default function Interview() {
   const [error, setError] = useState('')
   const [done, setDone] = useState(false)
   const [showTip, setShowTip] = useState(false)
+  const [draft, setDraft] = useState(() => loadDraft())
   const topRef = useRef(null)
+
+  // Keep the interview in progress (including a half-typed answer) in this browser.
+  useEffect(() => {
+    if (setup && !done) saveDraft({ setup, results, index, answer, savedAt: Date.now() })
+  }, [setup, results, index, answer, done])
+
+  const resume = () => {
+    setSetup(draft.setup)
+    setQuestions(draft.results.map((r) => r.question))
+    setResults(draft.results)
+    setIndex(Math.min(draft.index || 0, draft.results.length - 1))
+    setAnswer(draft.answer || '')
+    setDone(false)
+    setDraft(null)
+  }
+
+  const discard = () => {
+    clearDraft()
+    setDraft(null)
+  }
 
   // On phones the next question/summary would otherwise appear above the fold after a long feedback card.
   useEffect(() => {
@@ -206,6 +227,7 @@ export default function Interview() {
       setResults(data.questions.map((q) => ({ question: q, answer: '', feedback: null })))
       setIndex(0)
       setDone(false)
+      setDraft(null)
     } catch (e) {
       setError(e.message)
     } finally {
@@ -251,6 +273,7 @@ export default function Interview() {
       })
       if (user) sync()
     }
+    clearDraft()
     setDone(true)
   }
 
@@ -262,6 +285,7 @@ export default function Interview() {
   }
 
   const reset = () => {
+    clearDraft()
     setSetup(null)
     setQuestions([])
     setResults([])
@@ -282,6 +306,19 @@ export default function Interview() {
       <div ref={topRef} className="scroll-mt-20" />
       <ErrorBox message={error} />
 
+      {!setup && draft && (
+        <div className="mb-4 flex flex-col gap-3 rounded-2xl border border-brand-200 bg-brand-50 p-4 sm:flex-row sm:items-center sm:justify-between">
+          <p className="text-sm text-ink">
+            <strong>Unfinished interview:</strong>{' '}
+            {[draft.setup.role || 'Mock interview', draft.setup.company].filter(Boolean).join(' @ ')} ·{' '}
+            {draft.results.filter((r) => r.feedback).length} of {draft.results.length} answered
+          </p>
+          <div className="flex gap-2">
+            <Button variant="secondary" onClick={discard}>Discard</Button>
+            <Button onClick={resume}>Resume</Button>
+          </div>
+        </div>
+      )}
       {!setup && <div className="mt-2"><Setup onStart={start} loading={loading} initial={initial} /></div>}
 
       {setup && !done && current && (

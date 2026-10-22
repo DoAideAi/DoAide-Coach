@@ -7,7 +7,7 @@ from typing import Literal
 from fastapi import APIRouter, Depends
 from pydantic import BaseModel, Field, model_validator
 
-from app.engines import interview, resume, salary
+from app.engines import interview, intro, resume, salary
 from app.ratelimit import ai_rate_limit
 
 router = APIRouter(prefix="/api", dependencies=[Depends(ai_rate_limit)])
@@ -55,6 +55,21 @@ class SalaryIn(BaseModel):
         return self
 
 
+class IntroIn(BaseModel):
+    name: str = Field("", max_length=60)
+    level: Level = "fresher"
+    target_role: str = Field(..., min_length=2, max_length=80)
+    target_company: str = Field("", max_length=80)
+    current_role: str = Field("", max_length=80)
+    current_company: str = Field("", max_length=80)
+    experience_years: float = Field(0, ge=0, le=50)
+    education: str = Field("", max_length=160)
+    skills: str = Field("", max_length=300)
+    achievement: str = Field("", max_length=400)
+    why: str = Field("", max_length=300)
+    length: Literal["short", "standard"] = "standard"
+
+
 @router.post("/interview/start")
 async def start_interview(body: InterviewStart) -> dict:
     questions, source = await interview.generate_questions(
@@ -78,3 +93,9 @@ async def score_resume(body: ResumeIn) -> dict:
 @router.post("/salary/negotiate")
 async def negotiate(body: SalaryIn) -> dict:
     return await salary.negotiation_plan(body.model_dump())
+
+
+@router.post("/intro/generate")
+async def generate_intro(body: IntroIn) -> dict:
+    data = body.model_dump(exclude={"length"})
+    return await intro.generate_intro(data, body.length)

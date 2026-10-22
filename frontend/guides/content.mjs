@@ -230,4 +230,118 @@ export const guides = [
     ],
     cta: ['/questions', 'Browse company-wise interview questions'],
   },
+  {
+    slug: 'tell-me-about-yourself-answer',
+    title: 'How to Answer "Tell Me About Yourself" (Freshers & Experienced, with Samples) | DoAide Coach',
+    h1: 'How to answer “Tell me about yourself” in an interview',
+    description:
+      'A simple present-past-future formula for “Tell me about yourself”, with sample answers for freshers, IT professionals and career switchers in India, plus the mistakes that cost candidates the first impression.',
+    updated: '2026-10-22',
+    intro: `<p>“Tell me about yourself” opens almost every interview in India — campus drives, lateral hires, HR rounds and managerial rounds alike. It looks like an icebreaker, but interviewers use it to judge how clearly you communicate and whether you understand what the job needs.</p>
+<p>The good news: it is the one question you can fully prepare in advance. This guide gives you a structure, three sample answers and a checklist.</p>`,
+    sections: [
+      [
+        'formula',
+        'The formula: present, past, future',
+        `<ol>
+<li><strong>Present (1-2 sentences):</strong> who you are right now — final-year student, or your current role and years of experience.</li>
+<li><strong>Past (2-3 sentences):</strong> the skills and one specific proof point — a project, internship or achievement, ideally with a number.</li>
+<li><strong>Future (1-2 sentences):</strong> why this role at this company is the natural next step.</li>
+</ol>
+<p>Aim for 60 to 90 seconds — about 130 to 190 words. Then stop and let the interviewer pick a thread. If you want a first draft from your own details, the <a href="/tell-me-about-yourself">free “Tell me about yourself” writer</a> builds one in this structure.</p>`,
+      ],
+      [
+        'fresher',
+        'Sample answer for a fresher',
+        `<blockquote>“I’m Priya, a final-year B.Tech Computer Science student at VIT, graduating in 2026. I enjoy building practical software — my main project is a library app in React and Node.js that about 300 students in my department use to reserve books. Last summer I interned at a Pune startup, where I wrote automated API tests. I’m applying for the Systems Engineer role at Infosys because I want to work on large client projects and learn how enterprise software is delivered.”</blockquote>
+<p>Why it works: it is specific (one project, one number), relevant to the role, and short.</p>`,
+      ],
+      [
+        'experienced',
+        'Sample answer for an experienced professional',
+        `<blockquote>“I’m Arjun. I’ve spent four years at HDFC Bank, currently as an MIS Executive in the retail lending team. I own the weekly branch performance reports, and last year I moved them from manual Excel to Power BI, which cut preparation time by about 40%. That project got me deeply into SQL and data modelling. I’m now looking for a Data Analyst role where analysis is the core of the job rather than a side task, which is why this position stood out.”</blockquote>`,
+      ],
+      [
+        'switcher',
+        'Sample answer for a career switcher',
+        `<blockquote>“I’m Neha. For three years I’ve been in customer support at a SaaS company, and for the last year I’ve also been the team’s go-to person for the product’s analytics dashboards. I completed a Google UX certificate and redesigned our help-centre flow as a side project, which reduced repeat tickets on billing questions. I’m moving into product design because I want to fix the problems I’ve been hearing about from customers every day.”</blockquote>
+<p>For a switch, connect the old role to the new one so the move sounds planned, not random.</p>`,
+      ],
+      [
+        'mistakes',
+        'Mistakes to avoid',
+        `<ul>
+<li><strong>Reading out your resume.</strong> They have it. Pick the two or three points that matter for this job.</li>
+<li><strong>Starting with family and hometown.</strong> “My father is a…” is common in Indian interviews and rarely helps. Add personal details only if asked.</li>
+<li><strong>Going over two minutes.</strong> Long answers signal poor prioritisation.</li>
+<li><strong>Being vague.</strong> “I am hardworking and a team player” is forgettable. One concrete example beats five adjectives.</li>
+<li><strong>Memorising word for word.</strong> Learn the structure and key points; say it naturally.</li>
+</ul>`,
+      ],
+    ],
+    faqs: [
+      ['How long should my answer to “Tell me about yourself” be?', 'Between 60 and 90 seconds, which is about 130 to 190 words when spoken at a calm pace.'],
+      ['Should I mention my family background?', 'Usually no. Unless the interviewer asks, focus on your education, skills, experience and why you want the role.'],
+      ['Can I use the same answer for every interview?', 'Keep the same structure, but change the last part — why this role and company — and pick the proof point most relevant to each job.'],
+      ['Is “Introduce yourself” the same question?', 'Yes. “Introduce yourself”, “Walk me through your resume” and “Tell me about yourself” all expect the same short present-past-future answer.'],
+    ],
+    cta: ['/tell-me-about-yourself', 'Write your “Tell me about yourself” answer free'],
+  },
+  {
+    slug: 'ats-resume-keywords-india',
+    title: 'ATS Resume Keywords: How to Get Past Naukri and LinkedIn Filters (India 2026) | DoAide Coach',
+    h1: 'ATS resume keywords: how to get your resume past the filters',
+    description:
+      'How applicant tracking systems used by Indian employers and job portals read your resume, how to pick keywords from a job description, formatting that breaks parsing, and a free resume-vs-JD score.',
+    updated: '2026-10-22',
+    intro: `<p>When you apply through a careers page, Naukri or LinkedIn, your resume is often parsed and searched by software before a recruiter opens it. Recruiters search and filter by skills, titles and experience, so a resume that is missing the right words can be skipped even when you are qualified.</p>
+<p>This guide explains what these systems look at and how to tailor your resume to a job description without stuffing it.</p>`,
+    sections: [
+      [
+        'how-ats',
+        'What an ATS actually does',
+        `<ul>
+<li><strong>Parses</strong> your resume into fields: name, contact, titles, employers, dates, education and skills.</li>
+<li><strong>Lets recruiters search</strong> those fields, for example “Java AND Spring Boot, 3-6 years, Bengaluru”.</li>
+<li><strong>Ranks or filters</strong> applicants against the job’s requirements in some systems.</li>
+</ul>
+<p>It does not “reject” you for a fancy design by itself — but a resume that parses badly may show up with empty fields and never match a search.</p>`,
+      ],
+      [
+        'keywords',
+        'Finding the right keywords in a job description',
+        `<ol>
+<li>Copy the job description and highlight <strong>hard skills</strong> (Python, SAP FICO, Tally, Salesforce), <strong>tools</strong>, <strong>certifications</strong> and the <strong>exact job title</strong>.</li>
+<li>Note which ones appear more than once or under “must have” — those matter most.</li>
+<li>For each keyword you genuinely have, make sure it appears in your skills section <em>and</em> in a bullet that shows you using it.</li>
+<li>Match the employer’s wording: if they say “Power BI”, don’t only write “BI dashboards”.</li>
+</ol>
+<p>The <a href="/resume">free resume scorer</a> does this comparison for you: paste your resume and the job description to see matched and missing keywords and an ATS checklist.</p>`,
+      ],
+      [
+        'format',
+        'Formatting that parses well',
+        `<table>
+<thead><tr><th>Do</th><th>Avoid</th></tr></thead>
+<tbody>
+<tr><td>Single column, standard headings (Experience, Education, Skills)</td><td>Two-column layouts with text boxes</td></tr>
+<tr><td>Text-based PDF or DOCX</td><td>Scanned images or a resume as a photo</td></tr>
+<tr><td>Dates as “Jun 2023 – Present”</td><td>Skill bars and star ratings</td></tr>
+<tr><td>Contact details in the body</td><td>Important details only in the header/footer</td></tr>
+</tbody></table>`,
+      ],
+      [
+        'stuffing',
+        'Why keyword stuffing backfires',
+        `<p>Pasting the whole job description in white text, or listing 60 skills, may get you past a search — and then a recruiter reads it. Keep every keyword truthful and backed by a bullet point. Interviewers in India commonly pick a skill from your resume and ask you to explain a project where you used it.</p>`,
+      ],
+    ],
+    faqs: [
+      ['Do Naukri and LinkedIn use ATS keyword matching?', 'Recruiters on job portals search and filter candidates by skills, titles, experience and location, so the same keyword advice applies to your profile and uploaded resume.'],
+      ['Is a PDF resume ATS-friendly?', 'A text-based PDF exported from Word or Google Docs parses well. A scanned PDF or an image does not.'],
+      ['How many keywords should my resume have?', 'There is no magic number. Cover the must-have skills from the job description that you genuinely have, each backed by experience.'],
+      ['What is a good resume match score?', 'On the DoAide Coach scorer, 75 and above means a strong match. Between 50 and 75, add the missing must-have keywords you genuinely have; below 50, tailor your resume before applying.'],
+    ],
+    cta: ['/resume', 'Score your resume against a job description'],
+  },
 ]

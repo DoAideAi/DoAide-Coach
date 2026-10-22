@@ -41,6 +41,9 @@ export function Footer() {
         </a>
         <p>Free AI interview prep and career coaching for Indian job seekers.</p>
         <WhatsAppButton text={SHARE_APP_TEXT} url={SITE_URL} label="Share DoAide Coach on WhatsApp" />
+        <Link to="/tell-me-about-yourself" className="inline-flex min-h-11 items-center font-semibold text-brand-700 hover:underline">
+          &ldquo;Tell me about yourself&rdquo; answer writer
+        </Link>
         {/* Plain link: /guides is static HTML outside the SPA. */}
         <a href="/guides" className="inline-flex min-h-11 items-center font-semibold text-brand-700 hover:underline">
           Interview &amp; salary guides

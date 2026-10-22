@@ -14,8 +14,14 @@ from app.config import settings
 from app.routers import account, coach, questions
 
 # Static guides rendered by frontend/scripts/build-guides.mjs; keep in sync with frontend/guides/content.mjs.
-GUIDES = ["hr-interview-questions-for-freshers", "how-to-negotiate-salary-india", "tcs-infosys-wipro-interview-process"]
-ROUTES = ["/", "/interview", "/resume", "/questions", "/salary", "/dashboard", "/guides"]
+GUIDES = [
+    "hr-interview-questions-for-freshers",
+    "how-to-negotiate-salary-india",
+    "tcs-infosys-wipro-interview-process",
+    "tell-me-about-yourself-answer",
+    "ats-resume-keywords-india",
+]
+ROUTES = ["/", "/interview", "/resume", "/questions", "/salary", "/dashboard", "/tell-me-about-yourself", "/guides"]
 ROUTES += [f"/guides/{slug}" for slug in GUIDES]
 
 

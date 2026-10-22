@@ -6,6 +6,8 @@ AI interview prep and career coaching for Indian job seekers. A DoAide product.
 - **Resume scorer**: paste a resume and a job description to get a match score, matched and missing keywords, an ATS checklist and suggestions.
 - **Question bank**: 60+ behavioral, technical and HR questions, filterable by industry, company (TCS, Infosys, Amazon, Flipkart, HDFC Bank…) and role.
 - **Salary negotiator**: enter current CTC, offer, experience and city to get a counter-offer, a walk-away number and a full script with an email template.
+- **"Tell me about yourself" writer** (`/tell-me-about-yourself`): turns name, degree, skills and one achievement into a 60-90 second self-introduction. A present → past → future template is the fallback; Gemini polishes it without inventing facts.
+- **Interview autosave**: an interview in progress (including a half-typed answer) is kept in localStorage and can be resumed after a reload.
 - **Progress dashboard**: scores over time, trend, weakest category.
 - **No-login by default**: history lives in localStorage. Optional Google sign-in syncs it across devices.
 

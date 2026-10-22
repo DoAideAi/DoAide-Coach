@@ -38,3 +38,31 @@ export function mergeSessions(local, remote) {
 export function clearSessions() {
   saveSessions([])
 }
+
+// An interview in progress, so a refresh, a phone call or a dead battery doesn't lose it.
+const DRAFT_KEY = 'coach.interview.draft'
+
+export function loadDraft() {
+  try {
+    const d = JSON.parse(localStorage.getItem(DRAFT_KEY) || 'null')
+    return d && d.setup && Array.isArray(d.results) && d.results.length ? d : null
+  } catch {
+    return null
+  }
+}
+
+export function saveDraft(draft) {
+  try {
+    localStorage.setItem(DRAFT_KEY, JSON.stringify(draft))
+  } catch {
+    /* quota or private mode */
+  }
+}
+
+export function clearDraft() {
+  try {
+    localStorage.removeItem(DRAFT_KEY)
+  } catch {
+    /* ignore */
+  }
+}

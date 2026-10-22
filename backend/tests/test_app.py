@@ -17,8 +17,9 @@ def test_sitemap_is_xml_and_lists_all_routes(client):
     resp = client.get("/sitemap.xml")
     assert resp.status_code == 200
     assert resp.headers["content-type"].startswith("application/xml")
-    for path in ["/interview", "/resume", "/questions", "/salary", "/dashboard", "/guides",
-                 "/guides/how-to-negotiate-salary-india"]:
+    for path in ["/interview", "/resume", "/questions", "/salary", "/dashboard", "/tell-me-about-yourself", "/guides",
+                 "/guides/how-to-negotiate-salary-india", "/guides/tell-me-about-yourself-answer",
+                 "/guides/ats-resume-keywords-india"]:
         assert f"<loc>https://coach.doaide.com{path}</loc>" in resp.text
 
 

@@ -26,20 +26,34 @@ function errorMessage(data, status) {
   return 'Something went wrong. Please try again.'
 }
 
-export async function api(path, { method = 'GET', body, auth = false } = {}) {
+// AI calls can take a while; past this, show an error the user can retry instead of a spinner forever.
+export const TIMEOUT_MS = 45_000
+
+export async function api(path, { method = 'GET', body, auth = false, timeout = TIMEOUT_MS } = {}) {
   const headers = {}
   if (body !== undefined) headers['Content-Type'] = 'application/json'
   const token = getToken()
   if (auth && token) headers.Authorization = `Bearer ${token}`
+  const controller = new AbortController()
+  const timer = setTimeout(() => controller.abort(), timeout)
   let res
   try {
     res = await fetch(path, {
       method,
       headers,
       body: body !== undefined ? JSON.stringify(body) : undefined,
+      signal: controller.signal,
     })
-  } catch {
-    throw new Error('Could not reach the server. Check your connection.')
+  } catch (e) {
+    const err = new Error(
+      e?.name === 'AbortError'
+        ? 'This is taking too long. Please try again.'
+        : 'Could not reach the server. Check your connection.',
+    )
+    err.status = e?.name === 'AbortError' ? 408 : 0
+    throw err
+  } finally {
+    clearTimeout(timer)
   }
   const data = await res.json().catch(() => ({}))
   if (!res.ok) {

@@ -12,6 +12,7 @@ const PRIMARY = [
 ]
 
 const MORE = [
+  { to: '/tell-me-about-yourself', icon: 'spark', name: '"Tell Me About Yourself" Writer', desc: 'Turn your degree, skills and one achievement into a confident 60-second self-introduction.' },
   { to: '/salary', icon: 'rupee', name: 'Salary Negotiator', desc: 'Enter your CTC and offer to get a counter-offer number and a word-for-word script.' },
   { to: '/dashboard', icon: 'chart', name: 'Progress Dashboard', desc: 'See your interview scores improve across practice sessions, and spot your weak areas.' },
 ]
