@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Link, useSearchParams } from 'react-router-dom'
 import Seo, { faq, webApp } from '../components/Seo'
 import {
@@ -102,23 +102,28 @@ function Feedback({ fb }) {
 }
 
 function Summary({ setup, results, onRestart }) {
-  const answered = results.filter((r) => r.feedback)
-  const avg = answered.length
-    ? Math.round((answered.reduce((t, r) => t + r.feedback.rating, 0) / answered.length) * 10)
-    : 0
+  const { score, answered } = scoreSession(results)
   const title = [setup.role || 'Mock interview', setup.company].filter(Boolean).join(' @ ')
   return (
     <div className="space-y-4">
       <Card className="text-center">
         <h2 className="text-xl font-bold">Interview complete!</h2>
         <p className="mt-1 text-ink-soft">{title}</p>
-        <div className="my-4 flex justify-center">
-          <ScoreRing score={avg} caption={`Overall ${avg}/100`} size={128} />
-        </div>
-        <p className="text-sm text-ink-soft">
-          You answered {answered.length} of {results.length} questions.
-          {avg >= 75 ? ' Excellent work. You are interview-ready!' : ' Every session makes you sharper. Keep practising!'}
-        </p>
+        {score === null ? (
+          <p className="my-4 text-sm text-ink-soft">
+            You skipped every question, so there is no score yet. Answer at least one question to get feedback.
+          </p>
+        ) : (
+          <>
+            <div className="my-4 flex justify-center">
+              <ScoreRing score={score} caption={`Overall ${score}/100`} size={128} />
+            </div>
+            <p className="text-sm text-ink-soft">
+              You answered {answered} of {results.length} questions.
+              {score >= 75 ? ' Excellent work. You are interview-ready!' : ' Every session makes you sharper. Keep practising!'}
+            </p>
+          </>
+        )}
         <div className="mt-4 flex flex-wrap justify-center gap-2">
           <Button onClick={onRestart}>Practise again</Button>
           <Link to="/dashboard" className="inline-flex items-center rounded-xl border border-slate-300 bg-white px-4 py-2.5 text-sm font-semibold hover:border-brand-400">
@@ -126,9 +131,15 @@ function Summary({ setup, results, onRestart }) {
           </Link>
         </div>
         <div className="mt-4 flex justify-center">
-          <ShareBar text={`I scored ${avg}/100 in a ${title} mock interview on DoAide Coach!`} />
+          <ShareBar
+            text={
+              score === null
+                ? 'Practising mock interviews for free on DoAide Coach. Try it:'
+                : `I scored ${score}/100 in a ${title} mock interview on DoAide Coach! Can you beat it?`
+            }
+          />
         </div>
-        <div className="mt-3"><SavedNote /></div>
+        {score !== null && <div className="mt-3"><SavedNote /></div>}
       </Card>
       {results.map((r, i) => (
         <Card key={i}>
@@ -174,6 +185,12 @@ export default function Interview() {
   const [error, setError] = useState('')
   const [done, setDone] = useState(false)
   const [showTip, setShowTip] = useState(false)
+  const topRef = useRef(null)
+
+  // On phones the next question/summary would otherwise appear above the fold after a long feedback card.
+  useEffect(() => {
+    if (setup) topRef.current?.scrollIntoView?.({ behavior: 'smooth', block: 'start' })
+  }, [index, done, setup])
 
   const initial = Object.fromEntries(
     ['role', 'company', 'industry'].filter((k) => params.get(k)).map((k) => [k, params.get(k)]),
@@ -262,6 +279,7 @@ export default function Interview() {
       />
       <BackLink />
       <PageHeader title="AI Mock Interview" subtitle="Answer one question at a time. Get honest feedback after each answer." />
+      <div ref={topRef} className="scroll-mt-20" />
       <ErrorBox message={error} />
 
       {!setup && <div className="mt-2"><Setup onStart={start} loading={loading} initial={initial} /></div>}
@@ -279,7 +297,7 @@ export default function Interview() {
           </div>
           <h2 className="text-lg font-bold leading-snug">{current.question.question}</h2>
           {current.question.tip && (
-            <button type="button" className="mt-2 text-sm font-medium text-brand-700" onClick={() => setShowTip(!showTip)}>
+            <button type="button" className="-mx-2 mt-1 min-h-11 rounded-lg px-2 text-sm font-medium text-brand-700" aria-expanded={showTip} onClick={() => setShowTip(!showTip)}>
               {showTip ? 'Hide hint' : 'Show hint'}
             </button>
           )}
@@ -299,9 +317,9 @@ export default function Interview() {
               />
               <div className="flex flex-wrap items-center justify-between gap-2">
                 <span className="text-xs text-ink-muted">{answer.trim().split(/\s+/).filter(Boolean).length} words · aim for 100-200</span>
-                <div className="flex gap-2">
+                <div className="flex w-full gap-2 sm:w-auto">
                   <Button type="button" variant="ghost" onClick={next} disabled={loading}>Skip</Button>
-                  <Button type="submit" disabled={loading || !answer.trim()}>
+                  <Button type="submit" disabled={loading || !answer.trim()} className="flex-1 sm:flex-none">
                     {loading ? <Spinner label="Reviewing…" /> : 'Get feedback'}
                   </Button>
                 </div>
@@ -314,7 +332,7 @@ export default function Interview() {
               </div>
               <Feedback fb={current.feedback} />
               <div className="mt-4 flex justify-end">
-                <Button onClick={next}>{index + 1 >= questions.length ? 'Finish interview' : 'Next question'}</Button>
+                <Button onClick={next} className="w-full sm:w-auto">{index + 1 >= questions.length ? 'Finish interview' : 'Next question'}</Button>
               </div>
             </>
           )}

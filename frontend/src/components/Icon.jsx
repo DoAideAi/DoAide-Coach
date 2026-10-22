@@ -11,6 +11,9 @@ const PATHS = {
   print: 'M7 8V3h10v5M7 17H5a1 1 0 0 1-1-1v-6a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v6a1 1 0 0 1-1 1h-2M7 14h10v7H7z',
   spark: 'M12 3v4M12 17v4M3 12h4M17 12h4M6 6l2.5 2.5M15.5 15.5 18 18M6 18l2.5-2.5M15.5 8.5 18 6',
   arrow: 'M5 12h14M13 6l6 6-6 6',
+  whatsapp: 'M3 21l1.65-4.95A9 9 0 1 1 8 19.4zM9 9.5c0 3 2.5 5.5 5.5 5.5l1-1.5-2-1-1 1a4 4 0 0 1-2-2l1-1-1-2z',
+  chevron: 'M6 9l6 6 6-6',
+  close: 'M6 6l12 12M18 6 6 18',
 }
 
 export default function Icon({ name, className = 'h-5 w-5' }) {

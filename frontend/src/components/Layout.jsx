@@ -1,6 +1,7 @@
 import { Link, NavLink, Outlet } from 'react-router-dom'
 import { GoogleSignInButton, useAuth } from '../lib/auth'
 import Icon from './Icon'
+import { SHARE_APP_TEXT, SITE_URL, WhatsAppButton } from './ui'
 
 export const NAV = [
   { to: '/interview', label: 'Interview', icon: 'mic' },
@@ -18,7 +19,7 @@ function AccountArea() {
         {user.picture && (
           <img src={user.picture} alt="" className="h-8 w-8 rounded-full" referrerPolicy="no-referrer" />
         )}
-        <button onClick={signOut} className="text-sm font-medium text-ink-soft hover:text-brand-700">
+        <button onClick={signOut} className="min-h-11 px-2 text-sm font-medium text-ink-soft hover:text-brand-700">
           Sign out
         </button>
       </div>
@@ -29,7 +30,7 @@ function AccountArea() {
 
 export function Footer() {
   return (
-    <footer className="mt-12 border-t border-slate-200 bg-white pb-24 pt-8 md:pb-8 print:hidden">
+    <footer className="mt-12 border-t border-slate-200 bg-white pb-28 pt-8 md:pb-8 print:hidden">
       <div className="mx-auto flex max-w-5xl flex-col items-center gap-3 px-4 text-center text-sm text-ink-muted">
         <a
           href="https://doaide.com"
@@ -39,8 +40,9 @@ export function Footer() {
           A DoAide Product
         </a>
         <p>Free AI interview prep and career coaching for Indian job seekers.</p>
+        <WhatsAppButton text={SHARE_APP_TEXT} url={SITE_URL} label="Share DoAide Coach on WhatsApp" />
         {/* Plain link: /guides is static HTML outside the SPA. */}
-        <a href="/guides" className="font-semibold text-brand-700 hover:underline">
+        <a href="/guides" className="inline-flex min-h-11 items-center font-semibold text-brand-700 hover:underline">
           Interview &amp; salary guides
         </a>
         <p>&copy; {new Date().getFullYear()} DoAide. AI feedback is guidance, not a guarantee.</p>
@@ -75,7 +77,10 @@ export default function Layout() {
               </NavLink>
             ))}
           </nav>
-          <AccountArea />
+          {/* Sign-in is optional (sync only), so keep it out of the way on phones; Progress page offers it there. */}
+          <div className="hidden sm:block">
+            <AccountArea />
+          </div>
         </div>
       </header>
 
@@ -86,7 +91,7 @@ export default function Layout() {
       <Footer />
 
       <nav
-        className="fixed inset-x-0 bottom-0 z-20 grid grid-cols-5 border-t border-slate-200 bg-white md:hidden print:hidden"
+        className="fixed inset-x-0 bottom-0 z-20 grid grid-cols-5 border-t border-slate-200 bg-white pb-[env(safe-area-inset-bottom)] md:hidden print:hidden"
         aria-label="Mobile"
       >
         {NAV.map((n) => (
@@ -94,7 +99,7 @@ export default function Layout() {
             key={n.to}
             to={n.to}
             className={({ isActive }) =>
-              `flex flex-col items-center gap-0.5 py-2 text-[11px] font-medium ${
+              `flex min-h-14 flex-col items-center justify-center gap-0.5 py-2 text-xs font-medium ${
                 isActive ? 'text-brand-700' : 'text-ink-muted'
               }`
             }

@@ -26,6 +26,33 @@ describe('Home & layout', () => {
     expect(ld).toEqual(expect.arrayContaining(['WebApplication', 'FAQPage']))
   })
 
+  it('puts the three core tools up front and shows a dismissible quick-start guide', async () => {
+    const user = userEvent.setup()
+    mockFetch()
+    const { unmount } = renderPage(<Home />)
+    const tools = screen.getByRole('heading', { name: 'Start here' }).parentElement
+    for (const name of ['AI Mock Interview', 'Resume Scorer', 'Question Bank']) {
+      expect(within(tools).getByText(name)).toBeInTheDocument()
+    }
+    expect(screen.getByRole('heading', { name: /New here/ })).toBeInTheDocument()
+    await user.click(screen.getByRole('button', { name: 'Got it' }))
+    expect(screen.queryByRole('heading', { name: /New here/ })).toBeNull()
+    unmount()
+
+    renderPage(<Home />)
+    expect(screen.queryByRole('heading', { name: /New here/ })).toBeNull()
+    await user.click(screen.getByRole('button', { name: 'How it works' }))
+    expect(screen.getByRole('heading', { name: /New here/ })).toBeInTheDocument()
+  })
+
+  it('offers WhatsApp share-the-app links pointing at the site', () => {
+    mockFetch()
+    renderPage(<Home />)
+    const links = screen.getAllByRole('link', { name: /WhatsApp/ })
+    expect(links.length).toBeGreaterThanOrEqual(2)
+    for (const a of links) expect(decodeURIComponent(a.getAttribute('href'))).toContain('https://coach.doaide.com')
+  })
+
   it('hides Google sign-in when not configured and shows it when configured', async () => {
     mockFetch({ '/api/config': { google_client_id: 'cid.apps.googleusercontent.com', ai_enabled: true } })
     renderPage(<Home />)
@@ -71,7 +98,10 @@ describe('Mock interview', () => {
     expect(await screen.findByText('Interview complete!')).toBeInTheDocument()
     expect(screen.getByText('Overall 80/100')).toBeInTheDocument()
     expect(screen.getByText('Skipped')).toBeInTheDocument()
-    expect(screen.getByRole('link', { name: /WhatsApp/ }).getAttribute('href')).toMatch(/^https:\/\/wa\.me\/\?text=/)
+    const wa = screen.getByRole('link', { name: 'Share on WhatsApp' }).getAttribute('href')
+    expect(wa).toMatch(/^https:\/\/wa\.me\/\?text=/)
+    expect(decodeURIComponent(wa)).toContain('I scored 80/100')
+    expect(decodeURIComponent(wa)).not.toContain('?company=')
     const saved = loadSessions()
     expect(saved).toHaveLength(1)
     expect(saved[0]).toMatchObject({ kind: 'interview', score: 80, title: 'Software Engineer @ TCS' })
@@ -83,6 +113,20 @@ describe('Mock interview', () => {
     renderPage(<Interview />)
     fireEvent.click(screen.getByRole('button', { name: 'Start interview' }))
     expect(await screen.findByRole('alert')).toHaveTextContent('Slow down')
+  })
+
+  it('does not show or share a 0/100 score when every question is skipped', async () => {
+    const user = userEvent.setup()
+    mockFetch({
+      'POST /api/interview/start': { session_id: 's1', source: 'ai', questions: [{ question: 'Q1?', category: 'hr', tip: '' }] },
+    })
+    renderPage(<Interview />)
+    await user.click(screen.getByRole('button', { name: 'Start interview' }))
+    await user.click(await screen.findByRole('button', { name: 'Skip' }))
+    expect(await screen.findByText(/skipped every question/)).toBeInTheDocument()
+    expect(screen.queryByText(/Overall/)).toBeNull()
+    expect(decodeURIComponent(screen.getByRole('link', { name: 'Share on WhatsApp' }).getAttribute('href'))).not.toContain('scored')
+    expect(loadSessions()).toHaveLength(0)
   })
 
   it('scoreSession averages answered questions only', () => {
@@ -146,6 +190,20 @@ describe('Question bank', () => {
     expect(await screen.findByText('Why should we hire you?')).toBeInTheDocument()
     expect(calls.some((c) => c.url === '/api/questions?category=hr')).toBe(true)
   })
+
+  it('applies a category from the URL and offers WhatsApp share per question', async () => {
+    const calls = mockFetch({
+      '/api/questions': {
+        total: 1,
+        questions: [{ id: 2, question: 'Why us?', category: 'hr', industry: 'all', roles: [], companies: [], difficulty: 'easy', tip: '' }],
+      },
+    })
+    renderPage(<Questions />, { path: '/questions?category=hr' })
+    expect(await screen.findByText('Why us?')).toBeInTheDocument()
+    expect(screen.getByRole('tab', { name: 'HR' })).toHaveAttribute('aria-selected', 'true')
+    expect(calls.some((c) => c.url === '/api/questions?category=hr')).toBe(true)
+    expect(decodeURIComponent(screen.getByLabelText('Share this question on WhatsApp').getAttribute('href'))).toContain('Why us?')
+  })
 })
 
 describe('Salary negotiator', () => {
@@ -196,7 +254,8 @@ describe('Dashboard', () => {
     expect(screen.getByText('Interview score over time')).toBeInTheDocument()
     expect(screen.getByRole('img', { name: /across 2 sessions/ })).toBeInTheDocument()
     expect(screen.getByText('Ask ₹14 LPA')).toBeInTheDocument()
-    expect(screen.getByText(/answers score lowest/)).toHaveTextContent('technical')
+    expect(screen.getByText(/answers score lowest/)).toHaveTextContent('Technical')
+    expect(screen.getByRole('link', { name: 'Review Technical questions' }).getAttribute('href')).toBe('/questions?category=technical')
     const tiles = screen.getByText('Avg interview').parentElement
     expect(within(tiles).getByText('60')).toBeInTheDocument()
 

@@ -15,7 +15,7 @@ export default function CopyButton({ text, label = 'Copy' }) {
     <button
       type="button"
       onClick={copy}
-      className="rounded-lg px-2 py-1 text-xs font-semibold text-brand-700 hover:bg-brand-50 print:hidden"
+      className="min-h-10 rounded-lg px-3 py-2 text-xs font-semibold text-brand-700 hover:bg-brand-50 print:hidden"
     >
       {copied ? 'Copied!' : label}
     </button>

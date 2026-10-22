@@ -2,9 +2,9 @@ import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import ScoreChart from '../components/ScoreChart'
 import Seo from '../components/Seo'
-import { BackLink, Button, Card, PageHeader, SavedNote } from '../components/ui'
+import { BackLink, Button, CATEGORY_LABEL, Card, PageHeader, SavedNote } from '../components/ui'
 import { api } from '../lib/api'
-import { useAuth } from '../lib/auth'
+import { GoogleSignInButton, useAuth } from '../lib/auth'
 import { clearSessions, loadSessions } from '../lib/storage'
 import { summarize, weakestCategory } from '../lib/stats'
 
@@ -21,7 +21,7 @@ function Tile({ label, value, sub }) {
 }
 
 export default function Dashboard() {
-  const { user, syncing } = useAuth()
+  const { user, syncing, signOut, config } = useAuth()
   const [sessions, setSessions] = useState(loadSessions)
 
   useEffect(() => {
@@ -79,8 +79,8 @@ export default function Dashboard() {
           {weak && (
             <Card className="!bg-brand-50 border-brand-100">
               <p className="text-sm text-brand-900">
-                <strong>Focus area:</strong> your <span className="capitalize">{weak}</span> answers score lowest.{' '}
-                <Link to={`/questions`} className="font-semibold underline">Review {weak} questions</Link>.
+                <strong>Focus area:</strong> your {CATEGORY_LABEL[weak] || weak} answers score lowest.{' '}
+                <Link to={`/questions?category=${encodeURIComponent(weak)}`} className="font-semibold underline">Review {CATEGORY_LABEL[weak] || weak} questions</Link>.
               </p>
             </Card>
           )}
@@ -115,6 +115,23 @@ export default function Dashboard() {
             <div className="mt-3"><SavedNote /></div>
           </Card>
         </div>
+      )}
+
+      {(user || config.google_client_id) && (
+        <Card className="mt-4">
+          <h2 className="font-bold">Sync across devices (optional)</h2>
+          {user ? (
+            <div className="mt-2 flex flex-wrap items-center justify-between gap-2 text-sm text-ink-soft">
+              <span>Your history is synced to {user.email}.</span>
+              <Button variant="secondary" onClick={signOut}>Sign out</Button>
+            </div>
+          ) : (
+            <>
+              <p className="mt-1 text-sm text-ink-soft">Everything works without an account. Sign in with Google only if you want this history on your phone and laptop.</p>
+              <div className="mt-3"><GoogleSignInButton /></div>
+            </>
+          )}
+        </Card>
       )}
     </>
   )

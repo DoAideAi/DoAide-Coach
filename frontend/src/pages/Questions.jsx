@@ -1,7 +1,10 @@
 import { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useSearchParams } from 'react-router-dom'
+import Icon from '../components/Icon'
 import Seo, { faq, webApp } from '../components/Seo'
-import { BackLink, Card, ErrorBox, FaqSection, INDUSTRIES, PageHeader, Spinner, inputClass } from '../components/ui'
+import {
+  BackLink, Card, ErrorBox, FaqSection, INDUSTRIES, PageHeader, SITE_URL, Spinner, inputClass, whatsappHref,
+} from '../components/ui'
 import { api } from '../lib/api'
 
 const CATEGORIES = [
@@ -39,13 +42,22 @@ function QuestionCard({ q }) {
         ))}
       </div>
       <h3 className="font-semibold leading-snug text-ink">{q.question}</h3>
-      <div className="mt-2 flex flex-wrap gap-3 text-sm">
-        <button type="button" className="font-medium text-brand-700" onClick={() => setOpen(!open)} aria-expanded={open}>
+      <div className="-mx-2 mt-1 flex flex-wrap text-sm">
+        <button type="button" className="min-h-11 rounded-lg px-2 font-medium text-brand-700" onClick={() => setOpen(!open)} aria-expanded={open}>
           {open ? 'Hide hint' : 'How to answer'}
         </button>
-        <Link to={`/interview?${practise}`} className="font-medium text-ink-soft hover:text-brand-700">
+        <Link to={`/interview?${practise}`} className="inline-flex min-h-11 items-center rounded-lg px-2 font-medium text-ink-soft hover:text-brand-700">
           Practise similar →
         </Link>
+        <a
+          href={whatsappHref(`Interview question: "${q.question}"\nHow would you answer? Practise free on DoAide Coach:`, `${SITE_URL}/questions`)}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex min-h-11 items-center gap-1 rounded-lg px-2 font-medium text-[#0e6f63]"
+          aria-label="Share this question on WhatsApp"
+        >
+          <Icon name="whatsapp" className="h-4 w-4" /> Share
+        </a>
       </div>
       {open && <p className="mt-2 rounded-lg bg-brand-50 p-3 text-sm text-brand-900">{q.tip}</p>}
     </Card>
@@ -53,7 +65,13 @@ function QuestionCard({ q }) {
 }
 
 export default function Questions() {
-  const [filters, setFilters] = useState({ category: '', industry: '', company: '', role: '', q: '' })
+  const [params] = useSearchParams()
+  const [filters, setFilters] = useState(() => {
+    const f = { category: '', industry: '', company: '', role: '', q: '' }
+    for (const k of Object.keys(f)) f[k] = params.get(k) || ''
+    if (!CATEGORIES.some(([v]) => v === f.category)) f.category = ''
+    return f
+  })
   const [meta, setMeta] = useState({ companies: [], roles: [] })
   const [data, setData] = useState(null)
   const [error, setError] = useState('')
@@ -95,7 +113,7 @@ export default function Questions() {
             role="tab"
             aria-selected={filters.category === v}
             onClick={() => setFilters({ ...filters, category: v })}
-            className={`shrink-0 rounded-full px-4 py-1.5 text-sm font-semibold ${
+            className={`min-h-11 shrink-0 rounded-full px-5 py-2 text-sm font-semibold ${
               filters.category === v ? 'bg-brand-700 text-white' : 'border border-slate-300 bg-white text-ink-soft'
             }`}
           >

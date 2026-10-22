@@ -50,7 +50,7 @@ export function Button({ children, variant = 'primary', className = '', ...props
   }
   return (
     <button
-      className={`inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2.5 text-sm font-semibold transition disabled:cursor-not-allowed ${styles[variant]} ${className}`}
+      className={`inline-flex min-h-11 items-center justify-center gap-2 rounded-xl px-4 py-2.5 text-sm font-semibold transition disabled:cursor-not-allowed ${styles[variant]} ${className}`}
       {...props}
     >
       {children}
@@ -112,19 +112,35 @@ export function ScoreRing({ score, max = 100, size = 112, caption }) {
   )
 }
 
+export const SITE_URL = 'https://coach.doaide.com'
+
+export function whatsappHref(text, url = SITE_URL) {
+  return `https://wa.me/?text=${encodeURIComponent(`${text}\n${url}`)}`
+}
+
+// Big green WhatsApp button. Shares a clean link (no query string) so friends land on the tool itself.
+export function WhatsAppButton({ text, url, label = 'Share on WhatsApp', className = '' }) {
+  const href = url ?? (typeof window !== 'undefined' ? `${window.location.origin}${window.location.pathname}` : SITE_URL)
+  return (
+    <a
+      href={whatsappHref(text, href)}
+      target="_blank"
+      rel="noopener noreferrer"
+      className={`inline-flex min-h-11 items-center justify-center gap-2 rounded-xl bg-[#128C7E] px-4 py-2.5 text-sm font-semibold text-white hover:bg-[#0e6f63] print:hidden ${className}`}
+    >
+      <Icon name="whatsapp" className="h-5 w-5" /> {label}
+    </a>
+  )
+}
+
+export const SHARE_APP_TEXT =
+  'Preparing for interviews? DoAide Coach gives free AI mock interviews, resume scoring and company-wise questions for Indian jobs. No login needed:'
+
 export function ShareBar({ text }) {
-  const url = typeof window !== 'undefined' ? window.location.href : ''
-  const wa = `https://wa.me/?text=${encodeURIComponent(`${text}\n${url}`)}`
   return (
     <div className="flex flex-wrap gap-2 print:hidden">
-      <a
-        href={wa}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="inline-flex items-center gap-2 rounded-xl bg-[#128C7E] px-4 py-2.5 text-sm font-semibold text-white hover:bg-[#0e6f63]"
-      >
-        <Icon name="share" className="h-4 w-4" /> Share on WhatsApp
-      </a>
+      <WhatsAppButton text={text} />
+      <WhatsAppButton text={SHARE_APP_TEXT} url={SITE_URL} label="Tell a friend" className="!bg-white !text-[#0e6f63] border border-[#128C7E] hover:!bg-green-50" />
       <Button variant="secondary" onClick={() => window.print()}>
         <Icon name="print" className="h-4 w-4" /> Print
       </Button>
@@ -152,11 +168,12 @@ export function FaqSection({ items }) {
       <h2 className="mb-3 text-lg font-bold">Frequently asked questions</h2>
       <div className="divide-y divide-slate-200 rounded-2xl border border-slate-200 bg-white">
         {items.map(([q, a]) => (
-          <details key={q} className="group p-4">
-            <summary className="cursor-pointer list-none font-semibold text-ink marker:hidden">
+          <details key={q} className="group">
+            <summary className="flex min-h-12 cursor-pointer list-none items-center justify-between gap-3 p-4 font-semibold text-ink marker:hidden">
               {q}
+              <Icon name="chevron" className="h-5 w-5 shrink-0 text-ink-muted transition group-open:rotate-180" />
             </summary>
-            <p className="mt-2 text-sm text-ink-soft">{a}</p>
+            <p className="px-4 pb-4 text-sm text-ink-soft">{a}</p>
           </details>
         ))}
       </div>
@@ -166,7 +183,7 @@ export function FaqSection({ items }) {
 
 export function SavedNote() {
   return (
-    <p className="text-xs text-ink-muted">Saved in this browser. Sign in to sync across devices.</p>
+    <p className="text-xs text-ink-muted">Saved in this browser, no account needed. Sign in (optional) to sync across devices.</p>
   )
 }
 
@@ -180,3 +197,5 @@ export const INDUSTRIES = [
   ['hr', 'Human Resources'],
   ['operations', 'Operations & Supply Chain'],
 ]
+
+export const CATEGORY_LABEL = { behavioral: 'Behavioral', technical: 'Technical', hr: 'HR' }
