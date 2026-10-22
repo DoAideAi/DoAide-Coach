@@ -1,0 +1,14 @@
+[Unit]
+Description=DoAide Coach API
+After=network.target
+
+[Service]
+Type=simple
+User=root
+WorkingDirectory=/opt/DoAide-Coach/backend
+EnvironmentFile=/opt/DoAide-Coach/backend/.env
+ExecStart=/opt/DoAide-Coach/backend/venv/bin/uvicorn app.main:app --host 127.0.0.1 --port 3103
+Restart=always
+
+[Install]
+WantedBy=multi-user.target

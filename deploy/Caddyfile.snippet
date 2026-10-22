@@ -1,0 +1,14 @@
+coach.doaide.com {
+    handle /api/* {
+        reverse_proxy localhost:3103
+    }
+    handle /sitemap.xml {
+        reverse_proxy localhost:3103
+    }
+    handle /robots.txt {
+        reverse_proxy localhost:3103
+    }
+    handle {
+        reverse_proxy localhost:3104
+    }
+}
