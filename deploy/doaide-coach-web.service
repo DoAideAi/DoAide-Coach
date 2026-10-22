@@ -6,9 +6,9 @@ After=network.target
 Type=simple
 User=root
 WorkingDirectory=/opt/DoAide-Coach/frontend
-# SPA fallback lives in dist/serve.json (from public/) so static /guides pages win over it;
-# `-s` would put its catch-all rewrite ahead of those rules.
-ExecStart=/usr/bin/npx serve dist -l 3104
+# Routing lives in dist/serve.json (from public/): guide pages, then the SPA routes.
+# `-s` would put a catch-all rewrite ahead of those rules and hide /guides.
+ExecStart=/usr/bin/npx serve dist -l tcp://172.18.0.1:3104 --no-clipboard
 Restart=always
 
 [Install]

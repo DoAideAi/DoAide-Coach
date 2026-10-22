@@ -1,6 +1,7 @@
 {
   "rewrites": [
+    { "source": "/guides/:slug([a-z0-9-]+)", "destination": "/guides/:slug/index.html" },
     { "source": "/guides", "destination": "/guides/index.html" },
-    { "source": "/guides/:slug", "destination": "/guides/:slug/index.html" }
+    { "source": "/:page(interview|resume|questions|salary|dashboard)", "destination": "/index.html" }
   ]
 }

@@ -1,7 +1,7 @@
 // Post-build step: renders each guide in guides/content.mjs to a static
 // dist/guides/<slug>/index.html so crawlers get real HTML (the SPA only ships
-// one index.html). `serve -s` serves these files before falling back to the SPA.
-import { mkdirSync, writeFileSync } from 'node:fs'
+// one index.html). public/serve.json routes /guides URLs to these files.
+import { copyFileSync, mkdirSync, writeFileSync } from 'node:fs'
 import { dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { guides, site } from '../guides/content.mjs'
@@ -131,5 +131,9 @@ write(
     body: `<h1>${esc(site.indexH1)}</h1>\n<p>${esc(site.indexDescription)}</p>\n${cards}\n<a class="cta" href="/">${esc(site.indexCta)}</a>`,
   }),
 )
+
+// serve.json lists the SPA routes explicitly (a catch-all rewrite would also swallow
+// /guides), so unknown paths get the SPA's NotFound page with a real 404 status.
+copyFileSync(join(dist, 'index.html'), join(dist, '404.html'))
 
 console.log(`build-guides: wrote ${guides.length} guides + index to dist/guides`)

@@ -7,7 +7,7 @@ Type=simple
 User=root
 WorkingDirectory=/opt/DoAide-Coach/backend
 EnvironmentFile=/opt/DoAide-Coach/backend/.env
-ExecStart=/opt/DoAide-Coach/backend/venv/bin/uvicorn app.main:app --host 127.0.0.1 --port 3103
+ExecStart=/opt/DoAide-Coach/backend/venv/bin/uvicorn app.main:app --host 172.18.0.1 --port 3103
 Restart=always
 
 [Install]
