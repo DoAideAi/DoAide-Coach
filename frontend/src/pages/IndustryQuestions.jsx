@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import Seo, { faq, webApp } from '../components/Seo'
+import { ROUTE_META } from '../routeMeta'
 import { BackLink, Card, FaqSection, PageHeader } from '../components/ui'
 
 const BANKS = {
@@ -91,9 +92,7 @@ export default function IndustryQuestions() {
   return (
     <>
       <Seo
-        title="Industry-Specific Interview Questions — IT, Finance, Healthcare | DoAide Coach"
-        description="Practise interview questions tailored to your industry: IT & software engineering, finance & banking, and healthcare. With difficulty levels and AI mock interview links."
-        path="/industry-questions"
+        {...ROUTE_META['/industry-questions']}
         jsonLd={[webApp('Industry Interview Questions', '/industry-questions', 'Interview questions by industry.'), faq(FAQ_ITEMS)]}
       />
       <BackLink />

@@ -1,6 +1,7 @@
 import { useCallback, useState } from 'react'
 import { Link } from 'react-router-dom'
 import Seo, { faq, webApp } from '../components/Seo'
+import { ROUTE_META } from '../routeMeta'
 import { BackLink, Card, FaqSection, PageHeader } from '../components/ui'
 
 const STORAGE_KEY = 'coach:tips-checked'
@@ -126,9 +127,7 @@ export default function Tips() {
   return (
     <>
       <Seo
-        title="Interview Tips & Checklist — Complete Preparation Guide | DoAide Coach"
-        description="Everything you need before, during and after an interview: checklists, body language tips, virtual setup, common mistakes, and more. Track your progress."
-        path="/tips"
+        {...ROUTE_META['/tips']}
         jsonLd={[webApp('Interview Tips & Checklist', '/tips', 'Complete interview checklist and tips.'), faq(FAQ_ITEMS)]}
       />
       <BackLink />

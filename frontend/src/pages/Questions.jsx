@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { Link, useSearchParams } from 'react-router-dom'
 import Icon from '../components/Icon'
 import Seo, { faq, webApp } from '../components/Seo'
+import { ROUTE_META } from '../routeMeta'
 import {
   BackLink, Card, ErrorBox, FaqSection, INDUSTRIES, PageHeader, SITE_URL, Spinner, inputClass, whatsappHref,
 } from '../components/ui'
@@ -100,9 +101,7 @@ export default function Questions() {
   return (
     <>
       <Seo
-        title="Interview Question Bank by Company & Role (India) | DoAide Coach"
-        description="Browse behavioral, technical and HR interview questions for TCS, Infosys, Wipro, Amazon, Flipkart, HDFC Bank and more, with tips on how to answer."
-        path="/questions"
+        {...ROUTE_META['/questions']}
         jsonLd={[webApp('Interview Question Bank', '/questions', 'Interview questions by company, role and category.'), faq(FAQ)]}
       />
       <BackLink />

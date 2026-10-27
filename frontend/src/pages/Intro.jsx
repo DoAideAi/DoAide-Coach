@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import CopyButton from '../components/Copy'
 import Seo, { faq, webApp } from '../components/Seo'
+import { ROUTE_META } from '../routeMeta'
 import {
   BackLink, BulletList, Button, Card, ErrorBox, FaqSection, Field, PageHeader, Spinner, WhatsAppButton, inputClass,
 } from '../components/ui'
@@ -50,9 +51,7 @@ export default function Intro() {
   return (
     <>
       <Seo
-        title="Tell Me About Yourself Answer Generator for Freshers & Experienced | DoAide Coach"
-        description="Write a confident 'Tell me about yourself' answer for your interview in 1 minute. Free AI tool for Indian freshers and experienced candidates. No login."
-        path="/tell-me-about-yourself"
+        {...ROUTE_META['/tell-me-about-yourself']}
         jsonLd={[
           webApp('Tell Me About Yourself Generator', '/tell-me-about-yourself', 'Free AI tool that writes a 60-90 second interview self-introduction from your details.'),
           faq(FAQ),

@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { Link, useSearchParams } from 'react-router-dom'
 import Seo, { faq, webApp } from '../components/Seo'
+import { ROUTE_META } from '../routeMeta'
 import {
   BackLink, BulletList, Button, Card, ErrorBox, FaqSection, Field, INDUSTRIES, PageHeader,
   SavedNote, ScoreRing, ShareBar, Spinner, inputClass,
@@ -374,9 +375,7 @@ export default function Interview() {
   return (
     <>
       <Seo
-        title="AI Mock Interview Practice for Indian Jobs | DoAide Coach"
-        description="Practise role and company-specific mock interviews with AI. Get instant ratings, improvement tips and model answers for TCS, Infosys, Amazon, HDFC and more."
-        path="/interview"
+        {...ROUTE_META['/interview']}
         jsonLd={[webApp('AI Mock Interview', '/interview', 'AI mock interviews with real-time feedback.'), faq(FAQ)]}
       />
       <BackLink />

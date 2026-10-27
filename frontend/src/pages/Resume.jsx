@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { Link, useSearchParams } from 'react-router-dom'
 import CopyButton from '../components/Copy'
 import Seo, { faq, webApp } from '../components/Seo'
+import { ROUTE_META } from '../routeMeta'
 import {
   BackLink, BulletList, Button, Card, ErrorBox, FaqSection, Field, PageHeader, SavedNote,
   ScoreRing, ShareBar, Spinner, inputClass,
@@ -88,9 +89,7 @@ export default function Resume() {
   return (
     <>
       <Seo
-        title="Free Resume Scorer for Indian Job Descriptions | DoAide Coach"
-        description="Paste your resume and a job description to get an ATS match score, missing keywords and specific improvement suggestions. Free, no login."
-        path="/resume"
+        {...ROUTE_META['/resume']}
         jsonLd={[webApp('Resume Scorer', '/resume', 'Score your resume against a job description.'), faq(FAQ)]}
       />
       <BackLink />

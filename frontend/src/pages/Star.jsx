@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import CopyButton from '../components/Copy'
 import Seo, { faq, webApp } from '../components/Seo'
+import { ROUTE_META } from '../routeMeta'
 import {
   BackLink, BulletList, Button, Card, ErrorBox, FaqSection, Field, PageHeader, Spinner, WhatsAppButton, inputClass,
 } from '../components/ui'
@@ -49,9 +50,7 @@ export default function Star() {
   return (
     <>
       <Seo
-        title="STAR Method Answer Generator for Interviews | DoAide Coach"
-        description="Turn your rough story into a polished STAR interview answer (Situation, Task, Action, Result) in one minute. Free AI tool for behavioral interviews. No login."
-        path="/star-method"
+        {...ROUTE_META['/star-method']}
         jsonLd={[
           webApp('STAR Method Answer Generator', '/star-method', 'Free AI tool that turns your story into a structured STAR interview answer.'),
           faq(FAQ),

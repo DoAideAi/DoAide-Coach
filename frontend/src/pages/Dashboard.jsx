@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import ScoreChart from '../components/ScoreChart'
 import Seo from '../components/Seo'
+import { ROUTE_META } from '../routeMeta'
 import { BackLink, Button, CATEGORY_LABEL, Card, PageHeader, SavedNote } from '../components/ui'
 import { api } from '../lib/api'
 import { GoogleSignInButton, useAuth } from '../lib/auth'
@@ -46,11 +47,7 @@ export default function Dashboard() {
 
   return (
     <>
-      <Seo
-        title="Interview Practice Progress Dashboard | DoAide Coach"
-        description="Track your mock interview scores, resume matches and practice streak over time. Free, and saved privately in your browser."
-        path="/dashboard"
-      />
+      <Seo {...ROUTE_META['/dashboard']} />
       <BackLink />
       <PageHeader title="Your Progress" subtitle={user ? `Signed in as ${user.email}${syncing ? ' · syncing…' : ''}` : 'Every session counts. Here is how far you have come.'} />
 

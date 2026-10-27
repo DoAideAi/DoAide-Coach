@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import Icon from '../components/Icon'
 import Seo, { faq, webApp } from '../components/Seo'
+import { ROUTE_META } from '../routeMeta'
 import QuickStart from '../components/QuickStart'
 import { FaqSection, SHARE_APP_TEXT, SITE_URL, WhatsAppButton } from '../components/ui'
 
@@ -29,9 +30,7 @@ export default function Home() {
   return (
     <>
       <Seo
-        title="DoAide Coach: AI Interview Prep & Career Coaching for India"
-        description="Practise AI mock interviews, score your resume against Indian job descriptions, browse company-wise interview questions and get salary negotiation scripts. Free, no login."
-        path="/"
+        {...ROUTE_META['/']}
         jsonLd={[
           webApp('DoAide Coach', '/', 'AI interview prep and career coaching for Indian job seekers.'),
           faq(FAQ),

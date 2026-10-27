@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import CopyButton from '../components/Copy'
 import Seo, { faq, webApp } from '../components/Seo'
+import { ROUTE_META } from '../routeMeta'
 import {
   BackLink, BulletList, Button, Card, ErrorBox, FaqSection, Field, INDUSTRIES, PageHeader,
   SavedNote, ShareBar, Spinner, inputClass,
@@ -92,9 +93,7 @@ export default function Salary() {
   return (
     <>
       <Seo
-        title="Salary Negotiation Script Generator for India | DoAide Coach"
-        description="Enter your current CTC, offer, city and experience to get a counter-offer number, a word-for-word negotiation script and an email template."
-        path="/salary"
+        {...ROUTE_META['/salary']}
         jsonLd={[webApp('Salary Negotiator', '/salary', 'Salary negotiation scripts for Indian job offers.'), faq(FAQ)]}
       />
       <BackLink />

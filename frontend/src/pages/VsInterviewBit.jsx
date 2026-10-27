@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import Seo, { faq, webApp } from '../components/Seo'
+import { ROUTE_META } from '../routeMeta'
 import { BackLink, Card, FaqSection, PageHeader, WhatsAppButton } from '../components/ui'
 
 const FAQ = [
@@ -36,9 +37,7 @@ export default function VsInterviewBit() {
   return (
     <>
       <Seo
-        title="DoAide Coach vs InterviewBit (2026): Which Interview Prep Tool Do You Need?"
-        description="Honest comparison of DoAide Coach and InterviewBit for interview preparation in India: AI mock interviews, behavioral and HR rounds, DSA practice, salary negotiation, pricing and login requirements."
-        path="/coach-vs-interviewbit"
+        {...ROUTE_META['/coach-vs-interviewbit']}
         jsonLd={[
           webApp('DoAide Coach vs InterviewBit comparison', '/coach-vs-interviewbit', 'Comparison of DoAide Coach and InterviewBit for interview preparation.'),
           faq(FAQ),

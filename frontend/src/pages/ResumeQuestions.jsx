@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import Seo, { faq, webApp } from '../components/Seo'
+import { ROUTE_META } from '../routeMeta'
 import { BackLink, Button, Card, FaqSection, PageHeader, inputClass } from '../components/ui'
 
 const SKILL_PATTERNS = [
@@ -127,9 +128,7 @@ export default function ResumeQuestions() {
   return (
     <>
       <Seo
-        title="Resume to Interview Questions — Get Likely Questions | DoAide Coach"
-        description="Paste your resume and get likely interview questions based on your skills, experience and job titles. 100% private — runs in your browser, nothing uploaded."
-        path="/resume-questions"
+        {...ROUTE_META['/resume-questions']}
         jsonLd={[webApp('Resume to Questions', '/resume-questions', 'Generate interview questions from your resume.'), faq(FAQ_ITEMS)]}
       />
       <BackLink />
