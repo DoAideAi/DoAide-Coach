@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import ScoreChart from '../components/ScoreChart'
-import Seo from '../components/Seo'
+import Seo, { webApp } from '../components/Seo'
 import { ROUTE_META } from '../routeMeta'
 import { BackLink, Button, CATEGORY_LABEL, Card, PageHeader, SavedNote } from '../components/ui'
 import { api } from '../lib/api'
@@ -47,7 +47,7 @@ export default function Dashboard() {
 
   return (
     <>
-      <Seo {...ROUTE_META['/dashboard']} />
+      <Seo {...ROUTE_META['/dashboard']} jsonLd={[webApp('Interview Progress Dashboard', '/dashboard', 'Track mock interview scores and practice streaks.')]} />
       <BackLink />
       <PageHeader title="Your Progress" subtitle={user ? `Signed in as ${user.email}${syncing ? ' · syncing…' : ''}` : 'Every session counts. Here is how far you have come.'} />
 

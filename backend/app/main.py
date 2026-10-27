@@ -57,8 +57,13 @@ def create_app() -> FastAPI:
 
     @app.get("/sitemap.xml")
     def sitemap() -> Response:
+        from datetime import date
+
+        today = date.today().isoformat()
         urls = "".join(
-            f"<url><loc>{settings.site_url}{path}</loc><changefreq>weekly</changefreq>"
+            f"<url><loc>{settings.site_url}{path}</loc>"
+            f"<lastmod>{today}</lastmod>"
+            f"<changefreq>weekly</changefreq>"
             f"<priority>{'1.0' if path == '/' else '0.8'}</priority></url>"
             for path in ROUTES
         )

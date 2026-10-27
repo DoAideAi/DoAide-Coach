@@ -22,6 +22,7 @@ def test_sitemap_is_xml_and_lists_all_routes(client):
                  "/guides/how-to-negotiate-salary-india", "/guides/tell-me-about-yourself-answer",
                  "/guides/ats-resume-keywords-india"]:
         assert f"<loc>https://coach.doaide.com{path}</loc>" in resp.text
+    assert "<lastmod>" in resp.text
 
 
 def test_robots(client):
